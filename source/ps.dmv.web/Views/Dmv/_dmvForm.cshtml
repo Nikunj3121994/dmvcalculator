@@ -1,0 +1,14 @@
+﻿@model object
+
+<div ng-controller="dmvController">
+
+    <form id="dmvform"></form>
+
+    <div>{{first}}</div>
+
+    <ul>
+        <li ng-repeat="item in items">
+            {{item.description}}
+        </li>
+    </ul>
+</div>
