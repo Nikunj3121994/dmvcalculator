@@ -6,16 +6,25 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB Scripts", "DB Scripts", "{A4322AAB-2A46-4D84-B08C-ADB7DDDD385C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Create", "Create", "{53D8438D-B952-43AC-95C8-BE0C8A083E72}"
+	ProjectSection(SolutionItems) = preProject
+		Create.sql = Create.sql
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Delete", "Delete", "{565768E9-F735-4806-90C1-114DBA25D085}"
+	ProjectSection(SolutionItems) = preProject
+		Delete.sql = Delete.sql
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{14899A61-CD90-4EDF-9844-470A433D15CD}"
+	ProjectSection(SolutionItems) = preProject
+		Insert.sql = Insert.sql
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.infrastructure", "ps.dmv.infrastructure\ps.dmv.infrastructure.csproj", "{04FFF786-4F83-4869-B247-42438679AA30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.common", "ps.dmv.common\ps.dmv.common.csproj", "{77281A30-6639-4ABA-AD5D-D4756D2C5BC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.domain", "ps.dmv.domain\ps.dmv.domain.csproj", "{3497C38C-9246-4858-85A9-17555101F995}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.domain.application", "ps.dmv.domain\ps.dmv.domain.application.csproj", "{3497C38C-9246-4858-85A9-17555101F995}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{ADD6B9DD-1923-47A9-8F77-A66AF2EF30F5}"
 EndProject
@@ -24,6 +33,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.web.Tests", "ps.dmv.web.Tests\ps.dmv.web.Tests.csproj", "{515C1884-50B9-405F-8B49-34783C34125B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.web", "ps.dmv.web\ps.dmv.web.csproj", "{008D4935-D523-448F-ABCD-E1BD79AC4478}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.domain.data", "ps.dmv.domain.entities\ps.dmv.domain.data.csproj", "{556CF1BF-64B1-4347-B43C-7E6590DAD2B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +66,10 @@ Global
 		{008D4935-D523-448F-ABCD-E1BD79AC4478}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{008D4935-D523-448F-ABCD-E1BD79AC4478}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{008D4935-D523-448F-ABCD-E1BD79AC4478}.Release|Any CPU.Build.0 = Release|Any CPU
+		{556CF1BF-64B1-4347-B43C-7E6590DAD2B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{556CF1BF-64B1-4347-B43C-7E6590DAD2B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{556CF1BF-64B1-4347-B43C-7E6590DAD2B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{556CF1BF-64B1-4347-B43C-7E6590DAD2B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

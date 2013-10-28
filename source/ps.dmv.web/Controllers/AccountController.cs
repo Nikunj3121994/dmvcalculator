@@ -8,23 +8,32 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
+using ps.dmv.common.Helpers;
+using ps.dmv.common.Security;
+using ps.dmv.interfaces.Managers;
+using ps.dmv.web.Infrastructure.Core;
+using ps.dmv.web.Infrastructure.Security;
 using ps.dmv.web.Models;
 
 namespace ps.dmv.web.Controllers
 {
     [Authorize]
-    public partial class AccountController : Controller
+    public partial class AccountController : BaseDmvController
     {
-        public AccountController() : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+        private ISecurityManager _securityManager = null;
+
+        public AccountController(ISecurityManager securityManager)
         {
+            _securityManager = securityManager;
         }
 
-        public AccountController(UserManager<ApplicationUser> userManager)
+        public IAuthenticationManager _authenticationManager
         {
-            UserManager = userManager;
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
         }
-
-        public UserManager<ApplicationUser> UserManager { get; private set; }
 
         //
         // GET: /Account/Login
@@ -32,6 +41,7 @@ namespace ps.dmv.web.Controllers
         public virtual ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+
             return View();
         }
 
@@ -44,11 +54,11 @@ namespace ps.dmv.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.UserName, model.Password);
+                var user = await _securityManager.GetUserAsync(model.UserName, model.Password);
 
                 if (user != null)
                 {
-                    await SignInAsync(user, model.RememberMe);
+                    await new AuthenticationProvider(_authenticationManager, _securityManager).SignInAsync(user, model.RememberMe);
                     return RedirectToLocal(returnUrl);
                 }
                 else
@@ -79,12 +89,12 @@ namespace ps.dmv.web.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser() { UserName = model.UserName };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var result = await _securityManager.CreateRegistrationAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
-                    await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    await new AuthenticationProvider(_authenticationManager, _securityManager).SignInAsync(user, isPersistent: false);
+                    return RedirectToAction(MVC.Home.Index());
                 }
                 else
                 {
@@ -102,32 +112,33 @@ namespace ps.dmv.web.Controllers
         [ValidateAntiForgeryToken]
         public virtual async Task<ActionResult> Disassociate(string loginProvider, string providerKey)
         {
-            ManageMessageId? message = null;
-            IdentityResult result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
+            ManageMessageIdEnum? message = null;
+            IdentityResult result = await _securityManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
 
             if (result.Succeeded)
             {
-                message = ManageMessageId.RemoveLoginSuccess;
+                message = ManageMessageIdEnum.RemoveLoginSuccess;
             }
             else
             {
-                message = ManageMessageId.Error;
+                message = ManageMessageIdEnum.Error;
             }
-            return RedirectToAction("Manage", new { Message = message });
+            return RedirectToAction(MVC.Account.Manage(message));
         }
 
         //
         // GET: /Account/Manage
-        public virtual ActionResult Manage(ManageMessageId? message)
+        public virtual ActionResult Manage(ManageMessageIdEnum? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : "";
-            ViewBag.HasLocalPassword = HasPassword();
-            ViewBag.ReturnUrl = Url.Action("Manage");
+                message == ManageMessageIdEnum.ChangePasswordSuccess ? "Your password has been changed."
+                : message == ManageMessageIdEnum.SetPasswordSuccess ? "Your password has been set."
+                : message == ManageMessageIdEnum.RemoveLoginSuccess ? "The external login was removed."
+                : message == ManageMessageIdEnum.Error ? "An error has occurred."
+                : String.Empty;
+
+            ViewBag.HasLocalPassword = _securityManager.HasPassword(User.Identity.GetUserId());
+            ViewBag.ReturnUrl = Url.Action(MVC.Account.Manage());
             return View();
         }
 
@@ -137,18 +148,19 @@ namespace ps.dmv.web.Controllers
         [ValidateAntiForgeryToken]
         public virtual async Task<ActionResult> Manage(ManageUserViewModel model)
         {
-            bool hasPassword = HasPassword();
+            bool hasPassword = _securityManager.HasPassword(User.Identity.GetUserId());
             ViewBag.HasLocalPassword = hasPassword;
-            ViewBag.ReturnUrl = Url.Action("Manage");
+            ViewBag.ReturnUrl = Url.Action(MVC.Account.Manage());
 
             if (hasPassword)
             {
                 if (ModelState.IsValid)
                 {
-                    IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+                    IdentityResult result = await _securityManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                        return RedirectToAction(MVC.Account.Manage(ManageMessageIdEnum.ChangePasswordSuccess));
                     }
                     else
                     {
@@ -167,10 +179,10 @@ namespace ps.dmv.web.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
+                    IdentityResult result = await _securityManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
+                        return RedirectToAction(MVC.Account.Manage(ManageMessageIdEnum.SetPasswordSuccess ));
                     }
                     else
                     {
@@ -191,7 +203,7 @@ namespace ps.dmv.web.Controllers
         public virtual ActionResult ExternalLogin(string provider, string returnUrl)
         {
             // Request a redirect to the external login provider
-            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+            return new ChallengeResult(provider, Url.Action(MVC.Account.ExternalLoginCallback(returnUrl)));
         }
 
         //
@@ -199,19 +211,19 @@ namespace ps.dmv.web.Controllers
         [AllowAnonymous]
         public virtual async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+            var loginInfo = await _authenticationManager.GetExternalLoginInfoAsync();
 
             if (loginInfo == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction(MVC.Account.Login());
             }
 
             // Sign in the user with this external login provider if the user already has a login
-            var user = await UserManager.FindAsync(loginInfo.Login);
+            ApplicationUser user = await _securityManager.FindAsync(loginInfo.Login);
 
             if (user != null)
             {
-                await SignInAsync(user, isPersistent: false);
+                await new AuthenticationProvider(_authenticationManager, _securityManager).SignInAsync(user, isPersistent: false);
                 return RedirectToLocal(returnUrl);
             }
             else
@@ -219,7 +231,7 @@ namespace ps.dmv.web.Controllers
                 // If the user does not have an account, then prompt the user to create an account
                 ViewBag.ReturnUrl = returnUrl;
                 ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { UserName = loginInfo.DefaultUserName });
+                return View(MVC.Account.Views.ExternalLoginConfirmation, new ExternalLoginConfirmationViewModel { UserName = loginInfo.DefaultUserName });
             }
         }
 
@@ -230,28 +242,28 @@ namespace ps.dmv.web.Controllers
         public virtual ActionResult LinkLogin(string provider)
         {
             // Request a redirect to the external login provider to link a login for the current user
-            return new ChallengeResult(provider, Url.Action("LinkLoginCallback", "Account"), User.Identity.GetUserId());
+            return new ChallengeResult(provider, Url.Action(MVC.Account.LinkLoginCallback()), User.Identity.GetUserId());
         }
 
         //
         // GET: /Account/LinkLoginCallback
         public virtual async Task<ActionResult> LinkLoginCallback()
         {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
+            var loginInfo = await _authenticationManager.GetExternalLoginInfoAsync(DmvConstants.XsrfKey, User.Identity.GetUserId());
 
             if (loginInfo == null)
             {
-                return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
+                return RedirectToAction(MVC.Account.Manage(ManageMessageIdEnum.Error));
             }
 
-            var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
+            var result = await _securityManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Manage");
+                return RedirectToAction(MVC.Account.Manage());
             }
 
-            return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
+            return RedirectToAction(MVC.Account.Manage(ManageMessageIdEnum.Error));
         }
 
         //
@@ -263,28 +275,28 @@ namespace ps.dmv.web.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Manage");
+                return RedirectToAction(MVC.Account.Manage());
             }
 
             if (ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
-                var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+                var info = await _authenticationManager.GetExternalLoginInfoAsync();
 
                 if (info == null)
                 {
-                    return View("ExternalLoginFailure");
+                    return View(MVC.Account.Views.ExternalLoginFailure);
                 }
 
                 var user = new ApplicationUser() { UserName = model.UserName };
-                var result = await UserManager.CreateAsync(user);
+                var result = await _securityManager.CreateAsync(user);
 
                 if (result.Succeeded)
                 {
-                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    result = await _securityManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
-                        await SignInAsync(user, isPersistent: false);
+                        await new AuthenticationProvider(_authenticationManager, _securityManager).SignInAsync(user, isPersistent: false);
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -301,9 +313,9 @@ namespace ps.dmv.web.Controllers
         [ValidateAntiForgeryToken]
         public virtual ActionResult LogOff()
         {
-            AuthenticationManager.SignOut();
+            new AuthenticationProvider(_authenticationManager, _securityManager).SignOut();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(MVC.Home.Index());
         }
 
         //
@@ -317,109 +329,22 @@ namespace ps.dmv.web.Controllers
         [ChildActionOnly]
         public virtual ActionResult RemoveAccountList()
         {
-            var linkedAccounts = UserManager.GetLogins(User.Identity.GetUserId());
-            ViewBag.ShowRemoveButton = HasPassword() || linkedAccounts.Count > 1;
+            IList<UserLoginInfo> linkedAccounts = _securityManager.GetLogins(User.Identity.GetUserId());
 
-            return (ActionResult)PartialView("_RemoveAccountPartial", linkedAccounts);
+            ViewBag.ShowRemoveButton = _securityManager.HasPassword(User.Identity.GetUserId()) || linkedAccounts.Count > 1;
+
+            return (ActionResult)PartialView(MVC.Account.Views._RemoveAccountPartial, linkedAccounts);
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && UserManager != null)
+            if (disposing && _securityManager != null)
             {
-                UserManager.Dispose();
-                UserManager = null;
+                _securityManager.Dispose();
+                _securityManager = null;
             }
 
             base.Dispose(disposing);
         }
-
-        #region Helpers
-
-        // Used for XSRF protection when adding external logins
-        private const string XsrfKey = "XsrfId";
-
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
-
-        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
-        {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
-        }
-
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
-        }
-
-        private bool HasPassword()
-        {
-            var user = UserManager.FindById(User.Identity.GetUserId());
-            if (user != null)
-            {
-                return user.PasswordHash != null;
-            }
-            return false;
-        }
-
-        public enum ManageMessageId
-        {
-            ChangePasswordSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
-            Error
-        }
-
-        private ActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
-        }
-
-        private class ChallengeResult : HttpUnauthorizedResult
-        {
-            public ChallengeResult(string provider, string redirectUri) : this(provider, redirectUri, null)
-            {
-            }
-
-            public ChallengeResult(string provider, string redirectUri, string userId)
-            {
-                LoginProvider = provider;
-                RedirectUri = redirectUri;
-                UserId = userId;
-            }
-
-            public string LoginProvider { get; set; }
-            public string RedirectUri { get; set; }
-            public string UserId { get; set; }
-
-            public override void ExecuteResult(ControllerContext context)
-            {
-                var properties = new AuthenticationProperties() { RedirectUri = RedirectUri };
-                if (UserId != null)
-                {
-                    properties.Dictionary[XsrfKey] = UserId;
-                }
-                context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
-            }
-        }
-
-        #endregion
     }
 }

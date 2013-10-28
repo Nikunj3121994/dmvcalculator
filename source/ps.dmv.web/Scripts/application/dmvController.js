@@ -1,6 +1,6 @@
 ﻿/// dmvController
 
-app.controller('dmvController', function ($scope) {
+app.controller('dmvController', function ($scope, $http) {
 
     $scope.first = "First 123";
 

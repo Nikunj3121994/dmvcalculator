@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using ps.dmv.web.Infrastructure.Core;
 
 namespace ps.dmv.web.App_Start
 {
@@ -7,7 +8,7 @@ namespace ps.dmv.web.App_Start
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            filters.Add(new DmvHandleErrorAttribute());
         }
     }
 }

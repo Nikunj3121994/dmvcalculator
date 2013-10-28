@@ -6,19 +6,22 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using ps.dmv.web.Infrastructure.Core;
 
 namespace ps.dmv.web.Controllers
 {
-    public class DmvApiController : ApiController
+    public class DmvApiController : BaseApiDmvController
     {
         public DmvApiController()
         {
             
         }
 
-        public List<string> Get()
+        public List<object> Get()
         {
-            List<string> listOfItems = new List<string>() { { "coffee pot S" }, { "nerf gun S" }, { "phone S" } };
+            List<object> listOfItems = new List<object>() { new { description = "coffee pot S" }, new { description = "nerf gun S" }, new { description = "phone S" } };
+
+            //List<string> listOfItems = new List<string>() { {  "coffee pot S" }, { "nerf gun S" }, { "phone S" } };
 
     //{ "description": "coffee pot" },
     //{ "description": "nerf gun" },
@@ -28,11 +31,44 @@ namespace ps.dmv.web.Controllers
             return listOfItems;
         }
 
-        public HttpResponseMessage Get(int id)
-        {
-            // ...
 
-            return new HttpResponseMessage();
-        }
+
+
+
+
+
+
+        //public HttpResponseMessage Get(int id)
+        //{
+        //    // ...
+
+        //    return new HttpResponseMessage();
+        //}
+
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
+
+        //// GET api/<controller>/5
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
+
+        //// POST api/<controller>
+        //public void Post([FromBody]string value)
+        //{
+        //}
+
+        //// PUT api/<controller>/5
+        //public void Put(int id, [FromBody]string value)
+        //{
+        //}
+
+        //// DELETE api/<controller>/5
+        //public void Delete(int id)
+        //{
+        //}
     }
 }
