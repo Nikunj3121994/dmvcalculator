@@ -40,9 +40,14 @@
         <text>ro%u010Dni%20vnos</text>
       </controlProperties>
     </control>
-    <control controlID="11" controlTypeID="com.balsamiq.mockups::ComboBox" x="545" y="791" w="-1" h="-1" measuredW="101" measuredH="24" zOrder="8" locked="false" isInGroup="-1">
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::ComboBox" x="545" y="827" w="-1" h="-1" measuredW="101" measuredH="24" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Vrsta%20vozila</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::TextInput" x="545" y="785" w="101" h="-1" measuredW="53" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Datum</text>
       </controlProperties>
     </control>
   </controls>

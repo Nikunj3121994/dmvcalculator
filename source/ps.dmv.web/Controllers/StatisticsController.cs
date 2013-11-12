@@ -7,11 +7,11 @@ using ps.dmv.web.Infrastructure.Core;
 
 namespace ps.dmv.web.Controllers
 {
-    public class StatisticsController : BaseDmvController
+    public partial class StatisticsController : BaseDmvController
     {
         //
         // GET: /Statistics/
-        public ActionResult Index()
+        public virtual ActionResult Index()
         {
             return View();
         }

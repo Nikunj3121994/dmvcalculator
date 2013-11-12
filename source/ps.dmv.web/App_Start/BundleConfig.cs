@@ -43,6 +43,9 @@ namespace ps.dmv.web.App_Start
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            //TODO: Check why optimations fail on AngularJS
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

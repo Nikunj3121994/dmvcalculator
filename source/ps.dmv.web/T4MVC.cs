@@ -26,7 +26,9 @@ public static class MVC
 {
     public static ps.dmv.web.Controllers.AccountController Account = new ps.dmv.web.Controllers.T4MVC_AccountController();
     public static ps.dmv.web.Controllers.DmvController Dmv = new ps.dmv.web.Controllers.T4MVC_DmvController();
+    public static ps.dmv.web.Controllers.ExternalImportCarDataController ExternalImportCarData = new ps.dmv.web.Controllers.T4MVC_ExternalImportCarDataController();
     public static ps.dmv.web.Controllers.HomeController Home = new ps.dmv.web.Controllers.T4MVC_HomeController();
+    public static ps.dmv.web.Controllers.StatisticsController Statistics = new ps.dmv.web.Controllers.T4MVC_StatisticsController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 

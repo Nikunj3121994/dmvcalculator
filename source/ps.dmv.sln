@@ -7,17 +7,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB Scripts", "DB Scripts", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Create", "Create", "{53D8438D-B952-43AC-95C8-BE0C8A083E72}"
 	ProjectSection(SolutionItems) = preProject
-		Create.sql = Create.sql
+		Create model.sql = Create model.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Delete", "Delete", "{565768E9-F735-4806-90C1-114DBA25D085}"
 	ProjectSection(SolutionItems) = preProject
-		Delete.sql = Delete.sql
+		Drop model.sql = Drop model.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{14899A61-CD90-4EDF-9844-470A433D15CD}"
 	ProjectSection(SolutionItems) = preProject
-		Insert.sql = Insert.sql
+		Insert data.sql = Insert data.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.infrastructure", "ps.dmv.infrastructure\ps.dmv.infrastructure.csproj", "{04FFF786-4F83-4869-B247-42438679AA30}"
@@ -35,6 +35,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.web", "ps.dmv.web\ps.dmv.web.csproj", "{008D4935-D523-448F-ABCD-E1BD79AC4478}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.domain.data", "ps.dmv.domain.entities\ps.dmv.domain.data.csproj", "{556CF1BF-64B1-4347-B43C-7E6590DAD2B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.domain.application.Tests", "ps.dmv.domain.application.Tests\ps.dmv.domain.application.Tests.csproj", "{3B9AC440-053F-402F-BD22-17D6A4A71238}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +72,10 @@ Global
 		{556CF1BF-64B1-4347-B43C-7E6590DAD2B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{556CF1BF-64B1-4347-B43C-7E6590DAD2B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{556CF1BF-64B1-4347-B43C-7E6590DAD2B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B9AC440-053F-402F-BD22-17D6A4A71238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B9AC440-053F-402F-BD22-17D6A4A71238}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B9AC440-053F-402F-BD22-17D6A4A71238}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B9AC440-053F-402F-BD22-17D6A4A71238}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,5 +85,6 @@ Global
 		{565768E9-F735-4806-90C1-114DBA25D085} = {A4322AAB-2A46-4D84-B08C-ADB7DDDD385C}
 		{14899A61-CD90-4EDF-9844-470A433D15CD} = {A4322AAB-2A46-4D84-B08C-ADB7DDDD385C}
 		{515C1884-50B9-405F-8B49-34783C34125B} = {ADD6B9DD-1923-47A9-8F77-A66AF2EF30F5}
+		{3B9AC440-053F-402F-BD22-17D6A4A71238} = {ADD6B9DD-1923-47A9-8F77-A66AF2EF30F5}
 	EndGlobalSection
 EndGlobal

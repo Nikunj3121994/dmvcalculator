@@ -1,0 +1,14 @@
+
+
+Public repo for the latest HTML5 JavaScript shim for IE to recognise and style the HTML5 elements.
+
+Also include's @jon_neal's latest printable HTML5 elements.
+
+To use, include the following script in your <head> element above your CSS:
+
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+
+

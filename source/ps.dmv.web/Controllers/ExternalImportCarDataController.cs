@@ -7,11 +7,11 @@ using ps.dmv.web.Infrastructure.Core;
 
 namespace ps.dmv.web.Controllers
 {
-    public class ExternalImportCarDataController : BaseDmvController
+    public partial class ExternalImportCarDataController : BaseDmvController
     {
         //
         // GET: /ExternalImportCarData/
-        public ActionResult Index()
+        public virtual ActionResult Index()
         {
             return View();
         }

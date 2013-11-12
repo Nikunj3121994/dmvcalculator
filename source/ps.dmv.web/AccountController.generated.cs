@@ -4,8 +4,6 @@
 // to the .tt file (i.e. the T4 template) and save it to regenerate this file.
 
 // Make sure the compiler doesn't complain about missing Xml comments
-
-using ps.dmv.web.Infrastructure.Security;
 #pragma warning disable 1591
 #region T4MVC
 
@@ -293,9 +291,9 @@ namespace ps.dmv.web.Controllers
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
-        partial void ManageOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, ManageMessageIdEnum? message);
+        partial void ManageOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, ps.dmv.web.Infrastructure.Security.ManageMessageIdEnum? message);
 
-        public override System.Web.Mvc.ActionResult Manage(ManageMessageIdEnum? message)
+        public override System.Web.Mvc.ActionResult Manage(ps.dmv.web.Infrastructure.Security.ManageMessageIdEnum? message)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Manage);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "message", message);

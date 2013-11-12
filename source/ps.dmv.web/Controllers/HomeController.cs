@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ps.dmv.common.Core;
+using ps.dmv.interfaces.Managers;
 using ps.dmv.web.Infrastructure.Core;
 
 namespace ps.dmv.web.Controllers
@@ -11,6 +14,8 @@ namespace ps.dmv.web.Controllers
     {
         public virtual ActionResult Index()
         {
+            var dmvManager = ServiceLocator.Instance.Resolve<IDmvCalculationManager>().GetAll();
+
             return View();
         }
 

@@ -60,12 +60,14 @@ namespace ps.dmv.web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
+            public readonly string Index = "Index";
             public readonly string DmvForm = "DmvForm";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
+            public const string Index = "Index";
             public const string DmvForm = "DmvForm";
         }
 
@@ -81,8 +83,10 @@ namespace ps.dmv.web.Controllers
             public class _ViewNamesClass
             {
                 public readonly string _dmvForm = "_dmvForm";
+                public readonly string Index = "Index";
             }
             public readonly string _dmvForm = "~/Views/Dmv/_dmvForm.cshtml";
+            public readonly string Index = "~/Views/Dmv/Index.cshtml";
         }
     }
 
@@ -90,6 +94,15 @@ namespace ps.dmv.web.Controllers
     public partial class T4MVC_DmvController : ps.dmv.web.Controllers.DmvController
     {
         public T4MVC_DmvController() : base(Dummy.Instance) { }
+
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult Index()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            IndexOverride(callInfo);
+            return callInfo;
+        }
 
         partial void DmvFormOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 

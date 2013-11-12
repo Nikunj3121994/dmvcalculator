@@ -1,0 +1,782 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ps.dmv.infrastructure.dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+          <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DmvCalculation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateOfCalculation" Type="datetime" Nullable="false" />
+          <Property Name="VehicleTypeId" Type="int" Nullable="false" />
+          <Property Name="FuelTypeId" Type="int" Nullable="false" />
+          <Property Name="Co2EmissionsValue" Type="smallint" Nullable="false" />
+          <Property Name="EuroExhaustTypeId" Type="int" Nullable="false" />
+          <Property Name="AtLeastEightSeatsVehicle" Type="bit" Nullable="false" />
+          <Property Name="DieselParticlesAbove005Limit" Type="bit" Nullable="false" />
+          <Property Name="EnginePowerKw" Type="int" Nullable="false" />
+          <Property Name="EngineDisplacementCcm" Type="int" Nullable="false" />
+          <Property Name="EngineTypeId" Type="int" Nullable="false" />
+          <Property Name="VehicleValue" Type="int" Nullable="false" />
+          <Property Name="BaseTaxRate" Type="int" Nullable="false" />
+          <Property Name="BaseTaxRateValue" Type="float" Nullable="false" />
+          <Property Name="AdditionalTaxRate" Type="int" Nullable="false" />
+          <Property Name="AdditionalTaxRateValue" Type="float" Nullable="false" />
+          <Property Name="TaxTotalValue" Type="float" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="EngineType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EuroExhaustType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FuelType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MobileDeCar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="DmvCalculationId" Type="int" Nullable="false" />
+          <Property Name="Maker" Type="nvarchar" MaxLength="30" />
+          <Property Name="Model" Type="nvarchar" MaxLength="30" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="VehicleType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DmvCalculation_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="DmvCalculation" Type="Self.DmvCalculation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DmvCalculation">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DmvCalculation_EngineType">
+          <End Role="EngineType" Type="Self.EngineType" Multiplicity="1" />
+          <End Role="DmvCalculation" Type="Self.DmvCalculation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EngineType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DmvCalculation">
+              <PropertyRef Name="EngineTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DmvCalculation_EuroExhaustType">
+          <End Role="EuroExhaustType" Type="Self.EuroExhaustType" Multiplicity="1" />
+          <End Role="DmvCalculation" Type="Self.DmvCalculation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EuroExhaustType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DmvCalculation">
+              <PropertyRef Name="EuroExhaustTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DmvCalculation_FuelType">
+          <End Role="FuelType" Type="Self.FuelType" Multiplicity="1" />
+          <End Role="DmvCalculation" Type="Self.DmvCalculation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FuelType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DmvCalculation">
+              <PropertyRef Name="FuelTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DmvCalculation_VehicleType">
+          <End Role="VehicleType" Type="Self.VehicleType" Multiplicity="1" />
+          <End Role="DmvCalculation" Type="Self.DmvCalculation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DmvCalculation">
+              <PropertyRef Name="VehicleTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MobileDeCar_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="MobileDeCar" Type="Self.MobileDeCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MobileDeCar">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MobileDeCar_DmvCalculation">
+          <End Role="DmvCalculation" Type="Self.DmvCalculation" Multiplicity="1" />
+          <End Role="MobileDeCar" Type="Self.MobileDeCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DmvCalculation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MobileDeCar">
+              <PropertyRef Name="DmvCalculationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="psdmvinfrastructuredbModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DmvCalculation" EntityType="Self.DmvCalculation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EngineType" EntityType="Self.EngineType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EuroExhaustType" EntityType="Self.EuroExhaustType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FuelType" EntityType="Self.FuelType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MobileDeCar" EntityType="Self.MobileDeCar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleType" EntityType="Self.VehicleType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DmvCalculation_AspNetUsers" Association="Self.FK_DmvCalculation_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="DmvCalculation" EntitySet="DmvCalculation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DmvCalculation_EngineType" Association="Self.FK_DmvCalculation_EngineType">
+            <End Role="EngineType" EntitySet="EngineType" />
+            <End Role="DmvCalculation" EntitySet="DmvCalculation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DmvCalculation_EuroExhaustType" Association="Self.FK_DmvCalculation_EuroExhaustType">
+            <End Role="EuroExhaustType" EntitySet="EuroExhaustType" />
+            <End Role="DmvCalculation" EntitySet="DmvCalculation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DmvCalculation_FuelType" Association="Self.FK_DmvCalculation_FuelType">
+            <End Role="FuelType" EntitySet="FuelType" />
+            <End Role="DmvCalculation" EntitySet="DmvCalculation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DmvCalculation_VehicleType" Association="Self.FK_DmvCalculation_VehicleType">
+            <End Role="VehicleType" EntitySet="VehicleType" />
+            <End Role="DmvCalculation" EntitySet="DmvCalculation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MobileDeCar_AspNetUsers" Association="Self.FK_MobileDeCar_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="MobileDeCar" EntitySet="MobileDeCar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MobileDeCar_DmvCalculation" Association="Self.FK_MobileDeCar_DmvCalculation">
+            <End Role="DmvCalculation" EntitySet="DmvCalculation" />
+            <End Role="MobileDeCar" EntitySet="MobileDeCar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ps.dmv.infrastructure.dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Discriminator" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DmvCalculation" Relationship="Self.FK_DmvCalculation_AspNetUsers" FromRole="AspNetUsers" ToRole="DmvCalculation" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="ps.dmv.infrastructure.dbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="ps.dmv.infrastructure.dbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="ps.dmv.infrastructure.dbModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="MobileDeCar" Relationship="ps.dmv.infrastructure.dbModel.FK_MobileDeCar_AspNetUsers" FromRole="AspNetUsers" ToRole="MobileDeCar" />
+        </EntityType>
+        <EntityType Name="DmvCalculation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateOfCalculation" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="VehicleTypeId" Type="Int32" Nullable="false" />
+          <Property Name="FuelTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Co2EmissionsValue" Type="Int16" Nullable="false" />
+          <Property Name="EuroExhaustTypeId" Type="Int32" Nullable="false" />
+          <Property Name="AtLeastEightSeatsVehicle" Type="Boolean" Nullable="false" />
+          <Property Name="EnginePowerKw" Type="Int32" Nullable="false" />
+          <Property Name="EngineDisplacementCcm" Type="Int32" Nullable="false" />
+          <Property Name="EngineTypeId" Type="Int32" Nullable="false" />
+          <Property Name="VehicleValue" Type="Int32" Nullable="false" />
+          <Property Name="BaseTaxRate" Type="Int32" Nullable="false" />
+          <Property Name="BaseTaxRateValue" Type="Double" Nullable="false" />
+          <Property Name="AdditionalTaxRate" Type="Int32" Nullable="false" />
+          <Property Name="AdditionalTaxRateValue" Type="Double" Nullable="false" />
+          <Property Name="TaxTotalValue" Type="Double" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_DmvCalculation_AspNetUsers" FromRole="DmvCalculation" ToRole="AspNetUsers" />
+          <NavigationProperty Name="EngineType" Relationship="Self.FK_DmvCalculation_EngineType" FromRole="DmvCalculation" ToRole="EngineType" />
+          <NavigationProperty Name="EuroExhaustType" Relationship="Self.FK_DmvCalculation_EuroExhaustType" FromRole="DmvCalculation" ToRole="EuroExhaustType" />
+          <NavigationProperty Name="FuelType" Relationship="Self.FK_DmvCalculation_FuelType" FromRole="DmvCalculation" ToRole="FuelType" />
+          <NavigationProperty Name="VehicleType" Relationship="Self.FK_DmvCalculation_VehicleType" FromRole="DmvCalculation" ToRole="VehicleType" />
+          <Property Name="DieselParticlesAbove005Limit" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MobileDeCar" Relationship="ps.dmv.infrastructure.dbModel.FK_MobileDeCar_DmvCalculation" FromRole="DmvCalculation" ToRole="MobileDeCar" />
+        </EntityType>
+        <EntityType Name="EngineType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DmvCalculation" Relationship="Self.FK_DmvCalculation_EngineType" FromRole="EngineType" ToRole="DmvCalculation" />
+        </EntityType>
+        <EntityType Name="EuroExhaustType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DmvCalculation" Relationship="Self.FK_DmvCalculation_EuroExhaustType" FromRole="EuroExhaustType" ToRole="DmvCalculation" />
+        </EntityType>
+        <EntityType Name="FuelType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DmvCalculation" Relationship="Self.FK_DmvCalculation_FuelType" FromRole="FuelType" ToRole="DmvCalculation" />
+        </EntityType>
+        <EntityType Name="VehicleType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DmvCalculation" Relationship="Self.FK_DmvCalculation_VehicleType" FromRole="VehicleType" ToRole="DmvCalculation" />
+        </EntityType>
+        <Association Name="FK_DmvCalculation_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="DmvCalculation" Type="Self.DmvCalculation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DmvCalculation">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DmvCalculation_EngineType">
+          <End Role="EngineType" Type="Self.EngineType" Multiplicity="1" />
+          <End Role="DmvCalculation" Type="Self.DmvCalculation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EngineType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DmvCalculation">
+              <PropertyRef Name="EngineTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DmvCalculation_EuroExhaustType">
+          <End Role="EuroExhaustType" Type="Self.EuroExhaustType" Multiplicity="1" />
+          <End Role="DmvCalculation" Type="Self.DmvCalculation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EuroExhaustType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DmvCalculation">
+              <PropertyRef Name="EuroExhaustTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DmvCalculation_FuelType">
+          <End Role="FuelType" Type="Self.FuelType" Multiplicity="1" />
+          <End Role="DmvCalculation" Type="Self.DmvCalculation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FuelType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DmvCalculation">
+              <PropertyRef Name="FuelTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DmvCalculation_VehicleType">
+          <End Role="VehicleType" Type="Self.VehicleType" Multiplicity="1" />
+          <End Role="DmvCalculation" Type="Self.DmvCalculation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DmvCalculation">
+              <PropertyRef Name="VehicleTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DmvEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="DmvCalculation" EntityType="Self.DmvCalculation" />
+          <EntitySet Name="EngineType" EntityType="Self.EngineType" />
+          <EntitySet Name="EuroExhaustType" EntityType="Self.EuroExhaustType" />
+          <EntitySet Name="FuelType" EntityType="Self.FuelType" />
+          <EntitySet Name="VehicleType" EntityType="Self.VehicleType" />
+          <AssociationSet Name="FK_DmvCalculation_AspNetUsers" Association="Self.FK_DmvCalculation_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="DmvCalculation" EntitySet="DmvCalculation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DmvCalculation_EngineType" Association="Self.FK_DmvCalculation_EngineType">
+            <End Role="EngineType" EntitySet="EngineType" />
+            <End Role="DmvCalculation" EntitySet="DmvCalculation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DmvCalculation_EuroExhaustType" Association="Self.FK_DmvCalculation_EuroExhaustType">
+            <End Role="EuroExhaustType" EntitySet="EuroExhaustType" />
+            <End Role="DmvCalculation" EntitySet="DmvCalculation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DmvCalculation_FuelType" Association="Self.FK_DmvCalculation_FuelType">
+            <End Role="FuelType" EntitySet="FuelType" />
+            <End Role="DmvCalculation" EntitySet="DmvCalculation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DmvCalculation_VehicleType" Association="Self.FK_DmvCalculation_VehicleType">
+            <End Role="VehicleType" EntitySet="VehicleType" />
+            <End Role="DmvCalculation" EntitySet="DmvCalculation" />
+          </AssociationSet>
+          <EntitySet Name="C__MigrationHistory" EntityType="ps.dmv.infrastructure.dbModel.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="ps.dmv.infrastructure.dbModel.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="ps.dmv.infrastructure.dbModel.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="ps.dmv.infrastructure.dbModel.AspNetUserLogins" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="ps.dmv.infrastructure.dbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="ps.dmv.infrastructure.dbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="ps.dmv.infrastructure.dbModel.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="MobileDeCar" EntityType="ps.dmv.infrastructure.dbModel.MobileDeCar" />
+          <AssociationSet Name="FK_MobileDeCar_AspNetUsers" Association="ps.dmv.infrastructure.dbModel.FK_MobileDeCar_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="MobileDeCar" EntitySet="MobileDeCar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MobileDeCar_DmvCalculation" Association="ps.dmv.infrastructure.dbModel.FK_MobileDeCar_DmvCalculation">
+            <End Role="DmvCalculation" EntitySet="DmvCalculation" />
+            <End Role="MobileDeCar" EntitySet="MobileDeCar" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="ps.dmv.infrastructure.dbModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="User_Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="ps.dmv.infrastructure.dbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="ps.dmv.infrastructure.dbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+          <End Type="ps.dmv.infrastructure.dbModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ps.dmv.infrastructure.dbModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="ps.dmv.infrastructure.dbModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ps.dmv.infrastructure.dbModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="ps.dmv.infrastructure.dbModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="ps.dmv.infrastructure.dbModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityType Name="MobileDeCar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DmvCalculationId" Type="Int32" Nullable="false" />
+          <Property Name="Maker" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="ps.dmv.infrastructure.dbModel.FK_MobileDeCar_AspNetUsers" FromRole="MobileDeCar" ToRole="AspNetUsers" />
+          <NavigationProperty Name="DmvCalculation" Relationship="ps.dmv.infrastructure.dbModel.FK_MobileDeCar_DmvCalculation" FromRole="MobileDeCar" ToRole="DmvCalculation" />
+        </EntityType>
+        <Association Name="FK_MobileDeCar_AspNetUsers">
+          <End Type="ps.dmv.infrastructure.dbModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="ps.dmv.infrastructure.dbModel.MobileDeCar" Role="MobileDeCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MobileDeCar">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MobileDeCar_DmvCalculation">
+          <End Type="ps.dmv.infrastructure.dbModel.DmvCalculation" Role="DmvCalculation" Multiplicity="1" />
+          <End Type="ps.dmv.infrastructure.dbModel.MobileDeCar" Role="MobileDeCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DmvCalculation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MobileDeCar">
+              <PropertyRef Name="DmvCalculationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="psdmvinfrastructuredbModelStoreContainer" CdmEntityContainer="DmvEntities">
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="ps.dmv.infrastructure.dbModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DmvCalculation">
+            <EntityTypeMapping TypeName="ps.dmv.infrastructure.dbModel.DmvCalculation">
+              <MappingFragment StoreEntitySet="DmvCalculation">
+                <ScalarProperty Name="DieselParticlesAbove005Limit" ColumnName="DieselParticlesAbove005Limit" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateOfCalculation" ColumnName="DateOfCalculation" />
+                <ScalarProperty Name="VehicleTypeId" ColumnName="VehicleTypeId" />
+                <ScalarProperty Name="FuelTypeId" ColumnName="FuelTypeId" />
+                <ScalarProperty Name="Co2EmissionsValue" ColumnName="Co2EmissionsValue" />
+                <ScalarProperty Name="EuroExhaustTypeId" ColumnName="EuroExhaustTypeId" />
+                <ScalarProperty Name="AtLeastEightSeatsVehicle" ColumnName="AtLeastEightSeatsVehicle" />
+                <ScalarProperty Name="EnginePowerKw" ColumnName="EnginePowerKw" />
+                <ScalarProperty Name="EngineDisplacementCcm" ColumnName="EngineDisplacementCcm" />
+                <ScalarProperty Name="EngineTypeId" ColumnName="EngineTypeId" />
+                <ScalarProperty Name="VehicleValue" ColumnName="VehicleValue" />
+                <ScalarProperty Name="BaseTaxRate" ColumnName="BaseTaxRate" />
+                <ScalarProperty Name="BaseTaxRateValue" ColumnName="BaseTaxRateValue" />
+                <ScalarProperty Name="AdditionalTaxRate" ColumnName="AdditionalTaxRate" />
+                <ScalarProperty Name="AdditionalTaxRateValue" ColumnName="AdditionalTaxRateValue" />
+                <ScalarProperty Name="TaxTotalValue" ColumnName="TaxTotalValue" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EngineType">
+            <EntityTypeMapping TypeName="ps.dmv.infrastructure.dbModel.EngineType">
+              <MappingFragment StoreEntitySet="EngineType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EuroExhaustType">
+            <EntityTypeMapping TypeName="ps.dmv.infrastructure.dbModel.EuroExhaustType">
+              <MappingFragment StoreEntitySet="EuroExhaustType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FuelType">
+            <EntityTypeMapping TypeName="ps.dmv.infrastructure.dbModel.FuelType">
+              <MappingFragment StoreEntitySet="FuelType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleType">
+            <EntityTypeMapping TypeName="ps.dmv.infrastructure.dbModel.VehicleType">
+              <MappingFragment StoreEntitySet="VehicleType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="ps.dmv.infrastructure.dbModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="ps.dmv.infrastructure.dbModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="ps.dmv.infrastructure.dbModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="ps.dmv.infrastructure.dbModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="ps.dmv.infrastructure.dbModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="MobileDeCar">
+            <EntityTypeMapping TypeName="ps.dmv.infrastructure.dbModel.MobileDeCar">
+              <MappingFragment StoreEntitySet="MobileDeCar">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Maker" ColumnName="Maker" />
+                <ScalarProperty Name="DmvCalculationId" ColumnName="DmvCalculationId" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
