@@ -1,0 +1,73 @@
+﻿<div ng-controller="dmvCalculationController">
+    
+    Samo za osebna vozila
+    <div ng-show="!dataLoaded">
+        Loading...
+    </div>
+
+    <form name="dmvCalculation" role="form" class="form-horizontal" ng-show="dataLoaded">
+
+        <div>{{dmvCalculation.init}}</div>
+        <fieldset ng-cloak>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    Vrsta goriva
+                </label>
+                <select name="fuelTypeId" ng-model="dmvCalculation.FuelTypeId" required class="form-control" ng-options="fuel.name for fuel in dmvCalculation.fuelTypeCodeTable"></select>
+                <span class="error" ng-show="dmvCalculation.fuelTypeId.$error.required">*</span>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    Izpust CO2
+                </label>
+                <input type="text" name="co2EmissionsValue" ng-pattern="onlyNumbers" ng-model="dmvCalculation.Co2EmissionsValue" required />
+                <span class="error" ng-show="dmvCalculation.co2EmissionsValue.$error.required">*</span>
+                <span class="error" ng-show="dmvCalculation.co2EmissionsValue.$error.pattern">**</span>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    Izpust EURO
+                </label>
+                <select name="euroExhaustTypeId" ng-model="dmvCalculation.EuroExhaustTypeId" required class="form-control" ng-options="euro.name for euro in dmvCalculation.euroExhaustTypeCodeTable"></select>
+                <span class="error" ng-show="dmvCalculation.euroExhaustTypeId.$error.required">*</span>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    Izpust trdih delcev večji od 0,005 g/km (samo za dizel)
+                </label>
+                <input name="dieselParticlesAbove005Limit" type="checkbox" ng-model="dmvCalculation.DieselParticlesAbove005Limit" />
+                <span class="error" ng-show="dmvCalculation.dieselParticlesAbove005Limit.$error.required">*</span>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    Delovna prostornina
+                </label>
+                <input name="engineDisplacementCcm" type="text" ng-pattern="onlyNumbers" ng-model="dmvCalculation.EngineDisplacementCcm" required />
+                <label>ccm</label>
+                <span class="error" ng-show="dmvCalculation.engineDisplacementCcm.$error.required">*</span>
+                <span class="error" ng-show="dmvCalculation.engineDisplacementCcm.$error.pattern">**</span>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    Davčna osnova
+                </label>
+                <input name="vehicleValue" type="text" ng-pattern="onlyNumbers" ng-model="dmvCalculation.VehicleValue" required />
+                <label>€</label>
+                <span class="error" ng-show="dmvCalculation.vehicleValue.$error.required">*</span>
+                <span class="error" ng-show="dmvCalculation.vehicleValue.$error.pattern">**</span>
+            </div>
+
+            <button class="btn btn-default" ng-click="processDmvCalculation(dmvCalculation)">Process</button>
+
+        </fieldset>
+
+    </form>
+
+    <a href="#/Calculator">DMV izračun</a>
+</div>

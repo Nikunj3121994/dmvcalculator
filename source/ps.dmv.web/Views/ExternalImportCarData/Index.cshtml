@@ -1,7 +1,41 @@
-﻿@model dynamic
+﻿@using ps.dmv.common.Helpers
+@model ImportMobileDe
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Uvoz vozila iz portala Mobile.de";
 }
 
-<h2>title</h2>
+<h2>Uvoz vozila iz portala Mobile.de</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4><a href="http://www.mobile.de">mobile.de</a></h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Url, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Url)
+                @Html.ValidationMessageFor(model => model.Url)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.VehicleTypeId, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.VehicleTypeId)
+                @Html.ValidationMessageFor(model => model.VehicleTypeId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

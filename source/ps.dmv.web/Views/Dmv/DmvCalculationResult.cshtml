@@ -1,0 +1,81 @@
+﻿@model DmvCalculationResult
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-controller="dmvCalculationController">
+    <h3>Dmv calculation result</h3>
+
+    <div>
+
+        @if (this.Model.MobileDeCar != null)
+        {
+            <ul>
+                <li>
+                    <label>Id</label>
+                    <span>@this.Model.MobileDeCar.Id</span>
+                </li>
+                <li>
+                    <label>Datum izračuna</label>
+                    <span>@this.Model.MobileDeCar.CreatedOn</span>
+                </li>
+                <li>
+                    <label>Model</label>
+                    <span><a href="@this.Model.MobileDeCar.Url">@this.Model.MobileDeCar.Model</a></span>
+                </li>
+                <li>
+                    <label>Picture</label>
+                    <span><img src="@this.Model.MobileDeCar.ImageUrl"/></span>
+                </li>
+            </ul>
+        }
+
+        <ul>
+            <li>
+                <label>Id</label>
+                <span>@this.Model.DmvCalculation.Id</span>
+            </li>
+            <li>
+                <label>Datum izračuna</label>
+                <span>@this.Model.DmvCalculation.CreatedOn</span>
+            </li>
+            <li>
+                <label>Tip vozila</label>
+                <span>@this.Model.DmvCalculation.VehicleTypeId.ToString()</span>
+            </li>
+            <li>
+                <label>Co2</label>
+                <span>@this.Model.DmvCalculation.Co2EmissionsValue</span>
+            </li>
+            <li>
+                <label>Moč motorja</label>
+                <span>@this.Model.DmvCalculation.EnginePowerKw</span>
+            </li>
+            <li>
+                <label>Prostornina</label>
+                <span>@this.Model.DmvCalculation.EngineDisplacementCcm</span>
+            </li>
+            <li>
+                <label>Vrednost vozila</label>
+                <span>@this.Model.DmvCalculation.VehicleValue</span>
+            </li>
+            <li>
+                <label>Vsi davki</label>
+                <span>@this.Model.DmvCalculation.TaxTotalValue</span>
+            </li>
+            <li>
+                <label>Končna cena</label>
+                <span>@this.Model.DmvCalculation.TotalVehicleValueWithTax</span> 
+            </li>
+            <li>
+                <label></label>
+                <span></span>
+            </li>
+        </ul>
+
+    </div>
+
+    <a href="@Url.Action(MVC.Dmv.Index())">Dmv Calculator</a>
+</div>

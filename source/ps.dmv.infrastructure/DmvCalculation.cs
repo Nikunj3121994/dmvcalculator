@@ -16,7 +16,7 @@ namespace ps.dmv.infrastructure
     {
         public DmvCalculation()
         {
-            this.MobileDeCar = new HashSet<MobileDeCar>();
+            this.MobileDeCarList = new HashSet<MobileDeCar>();
         }
     
         public int Id { get; set; }
@@ -26,24 +26,27 @@ namespace ps.dmv.infrastructure
         public short Co2EmissionsValue { get; set; }
         public int EuroExhaustTypeId { get; set; }
         public bool AtLeastEightSeatsVehicle { get; set; }
+        public bool DieselParticlesAbove005Limit { get; set; }
         public int EnginePowerKw { get; set; }
         public int EngineDisplacementCcm { get; set; }
         public int EngineTypeId { get; set; }
-        public int VehicleValue { get; set; }
-        public int BaseTaxRate { get; set; }
+        public double VehicleValue { get; set; }
+        public double BaseTaxRate { get; set; }
         public double BaseTaxRateValue { get; set; }
-        public int AdditionalTaxRate { get; set; }
+        public double AdditionalTaxRate { get; set; }
         public double AdditionalTaxRateValue { get; set; }
         public double TaxTotalValue { get; set; }
         public bool IsDeleted { get; set; }
         public string UserId { get; set; }
-        public bool DieselParticlesAbove005Limit { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public Nullable<int> MobileDeCarId { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual EngineType EngineType { get; set; }
         public virtual EuroExhaustType EuroExhaustType { get; set; }
         public virtual FuelType FuelType { get; set; }
         public virtual VehicleType VehicleType { get; set; }
-        public virtual ICollection<MobileDeCar> MobileDeCar { get; set; }
+        public virtual ICollection<MobileDeCar> MobileDeCarList { get; set; }
+        public virtual MobileDeCar MobileDeCar { get; set; }
     }
 }

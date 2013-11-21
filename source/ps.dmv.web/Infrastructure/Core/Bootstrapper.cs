@@ -1,9 +1,12 @@
 ﻿using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using ps.dmv.common.Core;
+using ps.dmv.common.Security;
 using ps.dmv.domain.application.Managers;
+using ps.dmv.domain.application.Processors;
 using ps.dmv.infrastructure.Repositories;
 using ps.dmv.interfaces.Managers;
+using ps.dmv.interfaces.Processors;
 using ps.dmv.interfaces.Repositories;
 using ps.dmv.web.Controllers;
 
@@ -48,6 +51,13 @@ namespace ps.dmv.web.Infrastructure.Core
             container.RegisterType<IEuroExhaustTypeRepository, EuroExhaustTypeRepository>();
             container.RegisterType<IFuelTypeRepository, FuelTypeRepository>();
             container.RegisterType<IMobileDeRepository, MobileDeRepository>();
+
+            // Processors
+            container.RegisterType<IDmvCalculationProcessor, DmvCalculationProcessor>();
+            container.RegisterType<IMobileDeProcessor, MobileDeProcessor>();
+
+            // Providers
+            container.RegisterType<IUserProvider, UserProvider>();
 
             return container;
         }

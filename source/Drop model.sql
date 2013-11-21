@@ -1,6 +1,14 @@
 ﻿USE [ps.dmv.db]
 GO
 
+-- Dropping constraints
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[FK_DmvCalculation_MobileDeCar]') AND type in (N'F'))
+ALTER TABLE [dbo].[DmvCalculation] DROP CONSTRAINT FK_DmvCalculation_MobileDeCar
+GO
+
+-- Dropping tables
+
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[MobileDeCar]') AND type in (N'U'))
 DROP TABLE [dbo].[MobileDeCar]
 GO

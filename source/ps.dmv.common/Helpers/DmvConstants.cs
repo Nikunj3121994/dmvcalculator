@@ -6,9 +6,24 @@ using System.Threading.Tasks;
 
 namespace ps.dmv.common.Helpers
 {
+    /// <summary>
+    /// DmvConstants
+    /// </summary>
     public static class DmvConstants
     {
-        // Used for XSRF protection when adding external logins
+        /// <summary>
+        /// Used for XSRF protection when adding external logins
+        /// </summary>
         public const string XsrfKey = "XsrfId";
+
+        /// <summary>
+        /// The latest DMV calculations number
+        /// </summary>
+        public const int LatestDmvCalculationsNumber = 5;
+
+        /// <summary>
+        /// The initial page index
+        /// </summary>
+        public const int InitialPageIndex = 0;
     }
 }

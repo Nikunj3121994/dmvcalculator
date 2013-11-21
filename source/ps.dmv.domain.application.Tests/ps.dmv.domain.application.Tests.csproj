@@ -31,6 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.3.0.1304.1\lib\Net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.3.0.1304.1\lib\Net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.1.1309.1617\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -45,14 +54,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Managers\Class1.cs" />
+    <Compile Include="Core\BaseTest.cs" />
+    <Compile Include="Managers\DmvCalculationManagerTest.cs" />
+    <Compile Include="Processor\MobileDeProcessorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ps.dmv.common\ps.dmv.common.csproj">
+      <Project>{77281a30-6639-4aba-ad5d-d4756d2c5bc9}</Project>
+      <Name>ps.dmv.common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ps.dmv.domain.entities\ps.dmv.domain.data.csproj">
+      <Project>{556cf1bf-64b1-4347-b43c-7e6590dad2b9}</Project>
+      <Name>ps.dmv.domain.data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ps.dmv.domain\ps.dmv.domain.application.csproj">
+      <Project>{3497c38c-9246-4858-85a9-17555101f995}</Project>
+      <Name>ps.dmv.domain.application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ps.dmv.infrastructure\ps.dmv.infrastructure.csproj">
+      <Project>{04fff786-4f83-4869-b247-42438679aa30}</Project>
+      <Name>ps.dmv.infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ps.dmv.interfaces\ps.dmv.interfaces.csproj">
+      <Project>{EFB9386D-FA38-429F-A02A-E8108CF7B923}</Project>
+      <Name>ps.dmv.interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

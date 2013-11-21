@@ -5,17 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9ae8e4f44cf14f3ea22a4f17e5b3bd13" Name="Diagram1" ZoomLevel="99">
-        <EntityTypeShape EntityType="ps.dmv.infrastructure.dbModel.AspNetUsers" Width="1.5" PointX="11" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="ps.dmv.infrastructure.dbModel.DmvCalculation" Width="1.5" PointX="3.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ps.dmv.infrastructure.dbModel.AspNetUsers" Width="1.5" PointX="11.125" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ps.dmv.infrastructure.dbModel.EngineType" Width="1.5" PointX="6.125" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="ps.dmv.infrastructure.dbModel.EuroExhaustType" Width="1.5" PointX="0.625" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ps.dmv.infrastructure.dbModel.FuelType" Width="1.5" PointX="0.625" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ps.dmv.infrastructure.dbModel.VehicleType" Width="1.5" PointX="0.625" PointY="3.125" IsExpanded="true" />
-        <AssociationConnector Association="ps.dmv.infrastructure.dbModel.FK_DmvCalculation_AspNetUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="ps.dmv.infrastructure.dbModel.FK_DmvCalculation_EngineType" ManuallyRouted="false" />
-        <AssociationConnector Association="ps.dmv.infrastructure.dbModel.FK_DmvCalculation_EuroExhaustType" ManuallyRouted="false" />
-        <AssociationConnector Association="ps.dmv.infrastructure.dbModel.FK_DmvCalculation_FuelType" ManuallyRouted="false" />
-        <AssociationConnector Association="ps.dmv.infrastructure.dbModel.FK_DmvCalculation_VehicleType" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ps.dmv.infrastructure.dbModel.C__MigrationHistory" Width="1.5" PointX="13.5" PointY="0.5" />
         <EntityTypeShape EntityType="ps.dmv.infrastructure.dbModel.AspNetRoles" Width="1.5" PointX="12.875" PointY="7.125" />
         <EntityTypeShape EntityType="ps.dmv.infrastructure.dbModel.AspNetUserClaims" Width="1.5" PointX="11" PointY="7.125" />
@@ -23,9 +17,17 @@
         <AssociationConnector Association="ps.dmv.infrastructure.dbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" />
         <AssociationConnector Association="ps.dmv.infrastructure.dbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="ps.dmv.infrastructure.dbModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="ps.dmv.infrastructure.dbModel.MobileDeCar" Width="1.5" PointX="6.125" PointY="0.875" />
+        <AssociationConnector Association="ps.dmv.infrastructure.dbModel.FK_DmvCalculation_MobileDeCarId" />
+        <EntityTypeShape EntityType="ps.dmv.infrastructure.dbModel.DmvCalculation" Width="1.5" PointX="3.375" PointY="0.875" />
+        <EntityTypeShape EntityType="ps.dmv.infrastructure.dbModel.MobileDeCar" Width="1.5" PointX="6" PointY="0.875" />
+        <AssociationConnector Association="ps.dmv.infrastructure.dbModel.FK_DmvCalculation_AspNetUsers" />
         <AssociationConnector Association="ps.dmv.infrastructure.dbModel.FK_MobileDeCar_AspNetUsers" />
+        <AssociationConnector Association="ps.dmv.infrastructure.dbModel.FK_DmvCalculation_EngineType" />
+        <AssociationConnector Association="ps.dmv.infrastructure.dbModel.FK_DmvCalculation_EuroExhaustType" />
+        <AssociationConnector Association="ps.dmv.infrastructure.dbModel.FK_DmvCalculation_FuelType" />
+        <AssociationConnector Association="ps.dmv.infrastructure.dbModel.FK_DmvCalculation_VehicleType" />
         <AssociationConnector Association="ps.dmv.infrastructure.dbModel.FK_MobileDeCar_DmvCalculation" />
+        <AssociationConnector Association="ps.dmv.infrastructure.dbModel.FK_DmvCalculation_MobileDeCar" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

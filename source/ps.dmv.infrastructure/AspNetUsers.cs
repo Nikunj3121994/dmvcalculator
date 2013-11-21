@@ -16,10 +16,10 @@ namespace ps.dmv.infrastructure
     {
         public AspNetUsers()
         {
-            this.DmvCalculation = new HashSet<DmvCalculation>();
             this.AspNetUserClaims = new HashSet<AspNetUserClaims>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
             this.AspNetRoles = new HashSet<AspNetRoles>();
+            this.DmvCalculation = new HashSet<DmvCalculation>();
             this.MobileDeCar = new HashSet<MobileDeCar>();
         }
     
@@ -29,10 +29,10 @@ namespace ps.dmv.infrastructure
         public string SecurityStamp { get; set; }
         public string Discriminator { get; set; }
     
-        public virtual ICollection<DmvCalculation> DmvCalculation { get; set; }
         public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
+        public virtual ICollection<DmvCalculation> DmvCalculation { get; set; }
         public virtual ICollection<MobileDeCar> MobileDeCar { get; set; }
     }
 }

@@ -14,6 +14,11 @@ namespace ps.dmv.infrastructure
     
     public partial class MobileDeCar
     {
+        public MobileDeCar()
+        {
+            this.DmvCalculation1 = new HashSet<DmvCalculation>();
+        }
+    
         public int Id { get; set; }
         public string Url { get; set; }
         public int DmvCalculationId { get; set; }
@@ -21,8 +26,11 @@ namespace ps.dmv.infrastructure
         public string Model { get; set; }
         public bool IsDeleted { get; set; }
         public string UserId { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public string ImageUrl { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual DmvCalculation DmvCalculation { get; set; }
+        public virtual ICollection<DmvCalculation> DmvCalculation1 { get; set; }
     }
 }

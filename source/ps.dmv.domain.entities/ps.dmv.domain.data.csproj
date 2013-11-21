@@ -30,8 +30,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>dmv.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,9 +49,17 @@
   <ItemGroup>
     <Compile Include="Entities\DmvCalculation.cs" />
     <Compile Include="Entities\DmvCalculationResult.cs" />
+    <Compile Include="Entities\ImportMobileDe.cs" />
     <Compile Include="Entities\MobileDeCar.cs" />
     <Compile Include="Enum\CodeTableType.cs" />
+    <Compile Include="Enum\EngineTypeEnum.cs" />
+    <Compile Include="Enum\EuroExhaustTypeEnum.cs" />
+    <Compile Include="Enum\FuelTypeEnum.cs" />
+    <Compile Include="Enum\VehicleTypeEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dmv.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

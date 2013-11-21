@@ -7,10 +7,15 @@ using ps.dmv.web.Infrastructure.Core;
 
 namespace ps.dmv.web.Controllers
 {
+    /// <summary>
+    /// StatisticsController
+    /// </summary>
     public partial class StatisticsController : BaseDmvController
     {
-        //
-        // GET: /Statistics/
+        /// <summary>
+        /// Indexes this instance.
+        /// </summary>
+        /// <returns></returns>
         public virtual ActionResult Index()
         {
             return View();

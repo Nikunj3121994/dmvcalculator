@@ -55,14 +55,16 @@ CREATE TABLE [dbo].[DmvCalculation](
 	[EnginePowerKw] [int] NOT NULL,
 	[EngineDisplacementCcm] [int] NOT NULL,
 	[EngineTypeId] [int] NOT NULL,
-	[VehicleValue] [int] NOT NULL,
-	[BaseTaxRate] [int] NOT NULL,
+	[VehicleValue] [float] NOT NULL,
+	[BaseTaxRate] [float] NOT NULL,
 	[BaseTaxRateValue] [float] NOT NULL,
-	[AdditionalTaxRate] [int] NOT NULL,
+	[AdditionalTaxRate] [float] NOT NULL,
 	[AdditionalTaxRateValue] [float] NOT NULL,
 	[TaxTotalValue] [float] NOT NULL,
 	[IsDeleted] [bit] NOT NULL,
 	[UserId] [nvarchar](128) NULL,
+	[CreatedOn] [datetime] DEFAULT GETDATE() NOT NULL,
+	[MobileDeCarId] [int] NULL,
 	PRIMARY KEY([Id])
 )
 GO
@@ -82,24 +84,31 @@ GO
 ALTER TABLE [dbo].[DmvCalculation]  WITH CHECK ADD CONSTRAINT FK_DmvCalculation_AspNetUsers FOREIGN KEY([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id])
 GO
 
-
 -- [MobileDeCheckHistory]
 CREATE TABLE [dbo].[MobileDeCar](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Url] [nvarchar](250) NOT NULL,
-	[DmvCalculationId] [int] NOT NULL,
-	[Maker] [nvarchar](30) NULL,
-	[Model] [nvarchar](30) NULL,
+	[Url] [nvarchar](800) NOT NULL,
+	[DmvCalculationId] [int] NOT NULL UNIQUE,
+	[Maker] [nvarchar](200) NULL,
+	[Model] [nvarchar](200) NULL,
+	--[ImageUrl] [nvarchar](800) NULL,
 	[IsDeleted] [bit] NOT NULL,
 	[UserId] [nvarchar](128) NULL,
+	[CreatedOn] [datetime] DEFAULT GETDATE() NOT NULL,
 	PRIMARY KEY([Id])
 )
 GO
 
-ALTER TABLE [dbo].[MobileDeImport]  WITH CHECK ADD CONSTRAINT FK_MobileDeImport_DmvCalculation FOREIGN KEY([DmvCalculationId]) REFERENCES [dbo].[DmvCalculation] ([Id])
+ALTER TABLE [dbo].[MobileDeCar]  WITH CHECK ADD CONSTRAINT FK_MobileDeCar_DmvCalculation FOREIGN KEY([DmvCalculationId]) REFERENCES [dbo].[DmvCalculation] ([Id])
 GO
 
-ALTER TABLE [dbo].[MobileDeImport]  WITH CHECK ADD CONSTRAINT FK_MobileDeImport_AspNetUsers FOREIGN KEY([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id])
+ALTER TABLE [dbo].[MobileDeCar]  WITH CHECK ADD CONSTRAINT FK_MobileDeCar_AspNetUsers FOREIGN KEY([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id])
+GO
+
+
+-- Additonal referential integrity
+
+ALTER TABLE [dbo].[DmvCalculation]  WITH CHECK ADD CONSTRAINT FK_DmvCalculation_MobileDeCar FOREIGN KEY([MobileDeCarId]) REFERENCES [dbo].[MobileDeCar] ([Id])
 GO
 
 --

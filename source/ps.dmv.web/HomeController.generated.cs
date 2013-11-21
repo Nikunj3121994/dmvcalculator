@@ -63,6 +63,7 @@ namespace ps.dmv.web.Controllers
             public readonly string Index = "Index";
             public readonly string About = "About";
             public readonly string Contact = "Contact";
+            public readonly string LatestDmvCalculations = "LatestDmvCalculations";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -71,6 +72,7 @@ namespace ps.dmv.web.Controllers
             public const string Index = "Index";
             public const string About = "About";
             public const string Contact = "Contact";
+            public const string LatestDmvCalculations = "LatestDmvCalculations";
         }
 
 
@@ -84,10 +86,12 @@ namespace ps.dmv.web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _LatestDmvCalculations = "_LatestDmvCalculations";
                 public readonly string About = "About";
                 public readonly string Contact = "Contact";
                 public readonly string Index = "Index";
             }
+            public readonly string _LatestDmvCalculations = "~/Views/Home/_LatestDmvCalculations.cshtml";
             public readonly string About = "~/Views/Home/About.cshtml";
             public readonly string Contact = "~/Views/Home/Contact.cshtml";
             public readonly string Index = "~/Views/Home/Index.cshtml";
@@ -123,6 +127,15 @@ namespace ps.dmv.web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Contact);
             ContactOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void LatestDmvCalculationsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult LatestDmvCalculations()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LatestDmvCalculations);
+            LatestDmvCalculationsOverride(callInfo);
             return callInfo;
         }
 

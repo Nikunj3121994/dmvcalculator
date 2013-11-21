@@ -44,6 +44,12 @@ namespace ps.dmv.web.Controllers
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult DmvCalculationResult()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.DmvCalculationResult);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public DmvController Actions { get { return MVC.Dmv; } }
@@ -62,6 +68,8 @@ namespace ps.dmv.web.Controllers
         {
             public readonly string Index = "Index";
             public readonly string DmvForm = "DmvForm";
+            public readonly string DmvFormLite = "DmvFormLite";
+            public readonly string DmvCalculationResult = "DmvCalculationResult";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -69,9 +77,19 @@ namespace ps.dmv.web.Controllers
         {
             public const string Index = "Index";
             public const string DmvForm = "DmvForm";
+            public const string DmvFormLite = "DmvFormLite";
+            public const string DmvCalculationResult = "DmvCalculationResult";
         }
 
 
+        static readonly ActionParamsClass_DmvCalculationResult s_params_DmvCalculationResult = new ActionParamsClass_DmvCalculationResult();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_DmvCalculationResult DmvCalculationResultParams { get { return s_params_DmvCalculationResult; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_DmvCalculationResult
+        {
+            public readonly string id = "id";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -82,10 +100,14 @@ namespace ps.dmv.web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string _dmvForm = "_dmvForm";
+                public readonly string _dmvCalculationForm = "_dmvCalculationForm";
+                public readonly string _dmvCalculationFormLite = "_dmvCalculationFormLite";
+                public readonly string DmvCalculationResult = "DmvCalculationResult";
                 public readonly string Index = "Index";
             }
-            public readonly string _dmvForm = "~/Views/Dmv/_dmvForm.cshtml";
+            public readonly string _dmvCalculationForm = "~/Views/Dmv/_dmvCalculationForm.cshtml";
+            public readonly string _dmvCalculationFormLite = "~/Views/Dmv/_dmvCalculationFormLite.cshtml";
+            public readonly string DmvCalculationResult = "~/Views/Dmv/DmvCalculationResult.cshtml";
             public readonly string Index = "~/Views/Dmv/Index.cshtml";
         }
     }
@@ -110,6 +132,25 @@ namespace ps.dmv.web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.DmvForm);
             DmvFormOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void DmvFormLiteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult DmvFormLite()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.DmvFormLite);
+            DmvFormLiteOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void DmvCalculationResultOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
+
+        public override System.Web.Mvc.ActionResult DmvCalculationResult(int id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.DmvCalculationResult);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            DmvCalculationResultOverride(callInfo, id);
             return callInfo;
         }
 

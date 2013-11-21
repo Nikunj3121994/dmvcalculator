@@ -21,7 +21,7 @@ INSERT INTO [dbo].[EuroExhaustType] ([Name]) VALUES ('EURO5');
 INSERT INTO [dbo].[EuroExhaustType] ([Name]) VALUES ('EURO6');
 
 -- [EngineType]
-INSERT INTO [dbo].[EngineType] ([Name]) VALUES ('Štiritaktni (+vse ostalo');
+INSERT INTO [dbo].[EngineType] ([Name]) VALUES ('Štiritaktni (+vse ostalo)');
 INSERT INTO [dbo].[EngineType] ([Name]) VALUES ('Dvotaktni');
 
 

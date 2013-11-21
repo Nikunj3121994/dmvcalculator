@@ -1,0 +1,14 @@
+﻿@model List<DmvCalculation>
+
+<h2>Latest DMV calculations</h2>
+
+<div>
+    <ul>
+        @foreach (DmvCalculation dmvCalculation in this.Model)
+        {
+            <li><a href="@Url.Action(MVC.Dmv.DmvCalculationResult(dmvCalculation.Id))">Id: @dmvCalculation.Id; Davek skupaj: @dmvCalculation.TaxTotalValue</a></li>
+        }
+    </ul>
+</div>
+
+<p><a class="btn btn-default" href="@Url.Action(MVC.Statistics.Index())">More &raquo;</a></p>

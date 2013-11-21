@@ -26,7 +26,6 @@ namespace ps.dmv.infrastructure
         }
     
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<DmvCalculation> DmvCalculation { get; set; }
         public virtual DbSet<EngineType> EngineType { get; set; }
         public virtual DbSet<EuroExhaustType> EuroExhaustType { get; set; }
         public virtual DbSet<FuelType> FuelType { get; set; }
@@ -35,6 +34,7 @@ namespace ps.dmv.infrastructure
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<DmvCalculation> DmvCalculation { get; set; }
         public virtual DbSet<MobileDeCar> MobileDeCar { get; set; }
     }
 }
