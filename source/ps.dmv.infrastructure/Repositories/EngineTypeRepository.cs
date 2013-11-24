@@ -9,20 +9,33 @@ using ps.dmv.interfaces.Repositories;
 
 namespace ps.dmv.infrastructure.Repositories
 {
+    /// <summary>
+    /// EngineTypeRepository
+    /// </summary>
     public class EngineTypeRepository : IEngineTypeRepository
     {
-        private DmvEntities _db = null;
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EngineTypeRepository"/> class.
+        /// </summary>
         public EngineTypeRepository()
         {
-            _db = new DmvEntities();
+
         }
 
+        /// <summary>
+        /// Gets all.
+        /// </summary>
+        /// <returns></returns>
         public List<CodeTableItem> GetAll()
         {
             Mapper.CreateMap<EngineType, CodeTableItem>();
 
-            List<EngineType> engineTypeList = _db.EngineType.ToList();
+            List<EngineType> engineTypeList = null;
+
+            using (DmvEntities db = new DmvEntities())
+            {
+                engineTypeList = db.EngineType.ToList();
+            }
 
             List<CodeTableItem> codeTableItems = Mapper.Map<List<EngineType>, List<CodeTableItem>>(engineTypeList);
 

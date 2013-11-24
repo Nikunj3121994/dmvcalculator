@@ -44,6 +44,18 @@ namespace ps.dmv.web.Controllers
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult LatestDmvCalculations()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LatestDmvCalculations);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult LatestMobileDeCalculations()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LatestMobileDeCalculations);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public HomeController Actions { get { return MVC.Home; } }
@@ -61,21 +73,43 @@ namespace ps.dmv.web.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
-            public readonly string About = "About";
-            public readonly string Contact = "Contact";
+            public readonly string About = "O-Nas";
+            public readonly string Contact = "Kontakt";
             public readonly string LatestDmvCalculations = "LatestDmvCalculations";
+            public readonly string LatestMobileDeCalculations = "LatestMobileDeCalculations";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
-            public const string About = "About";
-            public const string Contact = "Contact";
+            public const string About = "O-Nas";
+            public const string Contact = "Kontakt";
             public const string LatestDmvCalculations = "LatestDmvCalculations";
+            public const string LatestMobileDeCalculations = "LatestMobileDeCalculations";
         }
 
 
+        static readonly ActionParamsClass_LatestDmvCalculations s_params_LatestDmvCalculations = new ActionParamsClass_LatestDmvCalculations();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_LatestDmvCalculations LatestDmvCalculationsParams { get { return s_params_LatestDmvCalculations; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_LatestDmvCalculations
+        {
+            public readonly string number = "number";
+            public readonly string calculationDisplayModeEnum = "calculationDisplayModeEnum";
+            public readonly string index = "index";
+        }
+        static readonly ActionParamsClass_LatestMobileDeCalculations s_params_LatestMobileDeCalculations = new ActionParamsClass_LatestMobileDeCalculations();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_LatestMobileDeCalculations LatestMobileDeCalculationsParams { get { return s_params_LatestMobileDeCalculations; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_LatestMobileDeCalculations
+        {
+            public readonly string number = "number";
+            public readonly string calculationDisplayModeEnum = "calculationDisplayModeEnum";
+            public readonly string index = "index";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -87,11 +121,17 @@ namespace ps.dmv.web.Controllers
             public class _ViewNamesClass
             {
                 public readonly string _LatestDmvCalculations = "_LatestDmvCalculations";
+                public readonly string _LatestDmvCalculationsAdvanced = "_LatestDmvCalculationsAdvanced";
+                public readonly string _LatestMobileDeCalculations = "_LatestMobileDeCalculations";
+                public readonly string _LatestMobileDeCalculationsAdvanced = "_LatestMobileDeCalculationsAdvanced";
                 public readonly string About = "About";
                 public readonly string Contact = "Contact";
                 public readonly string Index = "Index";
             }
             public readonly string _LatestDmvCalculations = "~/Views/Home/_LatestDmvCalculations.cshtml";
+            public readonly string _LatestDmvCalculationsAdvanced = "~/Views/Home/_LatestDmvCalculationsAdvanced.cshtml";
+            public readonly string _LatestMobileDeCalculations = "~/Views/Home/_LatestMobileDeCalculations.cshtml";
+            public readonly string _LatestMobileDeCalculationsAdvanced = "~/Views/Home/_LatestMobileDeCalculationsAdvanced.cshtml";
             public readonly string About = "~/Views/Home/About.cshtml";
             public readonly string Contact = "~/Views/Home/Contact.cshtml";
             public readonly string Index = "~/Views/Home/Index.cshtml";
@@ -130,12 +170,27 @@ namespace ps.dmv.web.Controllers
             return callInfo;
         }
 
-        partial void LatestDmvCalculationsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void LatestDmvCalculationsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int number, ps.dmv.web.Infrastructure.Enums.CalculationDisplayModeEnum calculationDisplayModeEnum, int? index);
 
-        public override System.Web.Mvc.ActionResult LatestDmvCalculations()
+        public override System.Web.Mvc.ActionResult LatestDmvCalculations(int number, ps.dmv.web.Infrastructure.Enums.CalculationDisplayModeEnum calculationDisplayModeEnum, int? index)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LatestDmvCalculations);
-            LatestDmvCalculationsOverride(callInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "number", number);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "calculationDisplayModeEnum", calculationDisplayModeEnum);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "index", index);
+            LatestDmvCalculationsOverride(callInfo, number, calculationDisplayModeEnum, index);
+            return callInfo;
+        }
+
+        partial void LatestMobileDeCalculationsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int number, ps.dmv.web.Infrastructure.Enums.CalculationDisplayModeEnum calculationDisplayModeEnum, int? index);
+
+        public override System.Web.Mvc.ActionResult LatestMobileDeCalculations(int number, ps.dmv.web.Infrastructure.Enums.CalculationDisplayModeEnum calculationDisplayModeEnum, int? index)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LatestMobileDeCalculations);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "number", number);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "calculationDisplayModeEnum", calculationDisplayModeEnum);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "index", index);
+            LatestMobileDeCalculationsOverride(callInfo, number, calculationDisplayModeEnum, index);
             return callInfo;
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Reflection;
@@ -19,11 +20,6 @@ namespace ps.dmv.infrastructure.Repositories
     public class DmvCalculationRepository : IDmvCalculationRepository
     {
         /// <summary>
-        /// The _DB
-        /// </summary>
-        private DmvEntities _db = null;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="DmvCalculationRepository"/> class.
         /// </summary>
         public DmvCalculationRepository()
@@ -33,8 +29,6 @@ namespace ps.dmv.infrastructure.Repositories
 
             Mapper.CreateMap<MobileDeCar, Domain.MobileDeCar>();
             Mapper.CreateMap<Domain.MobileDeCar, MobileDeCar>();
-
-            _db = new DmvEntities();
         }
 
         /// <summary>
@@ -43,10 +37,17 @@ namespace ps.dmv.infrastructure.Repositories
         /// <returns></returns>
         public PagedList<Domain.DmvCalculation> GetAll(int pageIndex, int pageSize)
         {
-            int count = _db.DmvCalculation.Where(d => d.IsDeleted == false).Count();
+            int count = 0;
 
-            List<DmvCalculation> dmvCalculationDbList = _db.DmvCalculation.Include("MobileDeCar").Where(d => d.IsDeleted == false)
-                .OrderByDescending(d => d.CreatedOn).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            List<DmvCalculation> dmvCalculationDbList = null;
+
+            using (DmvEntities db = new DmvEntities())
+            {
+                count = db.DmvCalculation.Where(d => d.IsDeleted == false).Count();
+
+                dmvCalculationDbList = db.DmvCalculation.Include("MobileDeCar").Where(d => d.IsDeleted == false)
+                    .OrderByDescending(d => d.CreatedOn).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            }
 
             List<Domain.DmvCalculation> dmvCalculationEntityList = Mapper.Map<List<DmvCalculation>, List<Domain.DmvCalculation>>(dmvCalculationDbList);
 
@@ -62,7 +63,13 @@ namespace ps.dmv.infrastructure.Repositories
         /// <returns></returns>
         public Domain.DmvCalculation Get(int id)
         {
-            DmvCalculation dmvCalculationDb = _db.DmvCalculation.Include("MobileDeCar").Where(c => c.IsDeleted == false && c.Id == id).FirstOrDefault();//TODO: check inlude!
+            DmvCalculation dmvCalculationDb = null;
+
+            using (DmvEntities db = new DmvEntities())
+            {
+
+                dmvCalculationDb = db.DmvCalculation.Include("MobileDeCar").Where(c => c.IsDeleted == false && c.Id == id).FirstOrDefault();
+            }
 
             Domain.DmvCalculation dmvCalculationEntity = Mapper.Map<Domain.DmvCalculation>(dmvCalculationDb);
 
@@ -79,9 +86,12 @@ namespace ps.dmv.infrastructure.Repositories
         {
             DmvCalculation dmvCalculationDb = Mapper.Map<DmvCalculation>(dmvCalculation);
 
-            dmvCalculationDb = _db.DmvCalculation.Add(dmvCalculationDb);
+            using (DmvEntities db = new DmvEntities())
+            {
+                dmvCalculationDb = db.DmvCalculation.Add(dmvCalculationDb);
 
-            await _db.SaveChangesAsync();
+                await db.SaveChangesAsync();
+            }
 
             Domain.DmvCalculation dmvCalculationEntity = Mapper.Map<Domain.DmvCalculation>(dmvCalculationDb);
 
@@ -98,12 +108,17 @@ namespace ps.dmv.infrastructure.Repositories
         {
             DmvCalculation dmvCalculationDb = Mapper.Map<DmvCalculation>(dmvCalculation);
 
-            dmvCalculationDb = _db.DmvCalculation.Attach(dmvCalculationDb);
-            DbEntityEntry<DmvCalculation> entry = _db.Entry(dmvCalculationDb);
-            //_db.Entry(dmvCalculationDb).State = EntityState.Modified;//TODO: change the updaing to the whole entity by loading and updating it
-            entry.Property(e => e.MobileDeCarId).IsModified = true;
+            using (DmvEntities db = new DmvEntities())
+            {
+                dmvCalculationDb = db.DmvCalculation.Attach(dmvCalculationDb);
 
-            await _db.SaveChangesAsync();
+                DbEntityEntry<DmvCalculation> entry = db.Entry(dmvCalculationDb);
+
+                entry.State = EntityState.Modified;
+                //entry.Property(e => e.MobileDeCarId).IsModified = true;
+
+                await db.SaveChangesAsync();
+            }
 
             Domain.DmvCalculation dmvCalculationEntity = Mapper.Map<Domain.DmvCalculation>(dmvCalculationDb);
 

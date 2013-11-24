@@ -41,6 +41,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Update", "Update", "{16713424-8B0F-4D83-8E68-FEC759D2CDEC}"
 	ProjectSection(SolutionItems) = preProject
 		Update1.sql = Update1.sql
+		Update2.sql = Update2.sql
 	EndProjectSection
 EndProject
 Global

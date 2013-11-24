@@ -1,29 +1,32 @@
-﻿@{
-    ViewBag.Title = "Home";
+﻿@using ps.dmv.web.Infrastructure.Enums
+
+@{
+    ViewBag.Title = "Doma";
 }
 
 <div class="jumbotron">
-    <h1>DMV Info</h1>
-    <p class="lead">This site prove you all data you need related to the DMV tax.</p>
-    <p><a href="http://www.durs.gov.si/si/davki_predpisi_in_pojasnila/davek_na_motorna_vozila_pojasnila/" class="btn btn-primary btn-large">Durs &raquo;</a></p>
+    <h1>Portal za izračun DMV</h1>
+    <p class="lead">Portal omogoča ročni izračun, kot tudi izračun DMVja na podlagi uvoza iz <a href="http://www.mobile.de">mobile.de</a> portala.</p>
+    
+    <a class="btn btn-lg btn-success" href="@Url.Action(MVC.Dmv.Index())" role="button">Izračunaj si DMV &raquo;</a>
+    ali
+    <a class="btn btn-lg btn-success" href="@Url.Action(MVC.ExternalImportCarData.Index())" role="button">Uvozi za izračun &raquo;</a>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Latest DMV news</h2>
+    <div class="col-md-4 content-background" style="width: 330px;"> @*//TODO fix style*@
+        <h2>Zadnje novice</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns\ and gives you full control over markup
-            for enjoyable, agile development.
+            <ul>
+                <li><a href="http://www.durs.gov.si/si/davki_predpisi_in_pojasnila/davek_na_motorna_vozila_pojasnila/dokazilo_da_je_bilo_vozilo_odpeljano_iz_slovenije_v_drugo_drzavo_clanico_in_obracun_dmv/">DOKAZILO, DA JE BILO VOZILO ODPELJANO IZ SLOVENIJE V DRUGO DRŽAVO ČLANICO IN OBRAČUN DMV</a></li>
+            </ul>
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p><a href="http://www.durs.gov.si/si/davki_predpisi_in_pojasnila/davek_na_motorna_vozila_pojasnila/" class="btn btn-default">Durs &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Latest mobile.de checks</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="col-md-4 content-background">
+        @Html.Action(MVC.Home.LatestDmvCalculations(DmvConstants.LatestDmvCalculationsNumber, CalculationDisplayModeEnum.Simple, null))
     </div>
-    <div class="col-md-4">
-        @Html.Action(MVC.Home.LatestDmvCalculations())
+    <div class="col-md-4 content-background">
+        @Html.Action(MVC.Home.LatestMobileDeCalculations(DmvConstants.LatestMobileDeCalculationsNumber, CalculationDisplayModeEnum.Simple, null))
     </div>
 </div>

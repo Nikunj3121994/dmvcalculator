@@ -1,12 +1,12 @@
 ﻿<div ng-controller="dmvCalculationController">
-    
+
     <div ng-show="!dataLoaded">
         Loading...
     </div>
 
-    <form name="dmvCalculation" role="form" class="form-horizontal" ng-show="dataLoaded">
+    <form name="dmvCalculation" role="form" class="form-horizontal content-background" ng-show="dataLoaded">
 
-        <div>{{dmvCalculation.init}}</div>
+        @*<div>{{dmvCalculation.init}}</div>*@
         <fieldset ng-cloak>
 
             <div class="form-group">
@@ -103,25 +103,26 @@
                 <span class="error" ng-show="dmvCalculation.vehicleValue.$error.required">*</span>
                 <span class="error" ng-show="dmvCalculation.vehicleValue.$error.pattern">**</span>
             </div>
-
-            <button class="btn btn-default" ng-click="processDmvCalculation(dmvCalculation)">Process</button>
+            <div class="col-md-offset-2 col-md-10">
+                <button class="btn btn-primary btn-large" ng-click="processDmvCalculation(dmvCalculation)">Izračunaj</button>
+            </div>
 
         </fieldset>
-        
+
         @*{{returnData}}
-        {{ returnData | json }}
+            {{ returnData | json }}
 
-        <p><label>State:</label> {{processDmvCalculationResult}}</p>
+            <p><label>State:</label> {{processDmvCalculationResult}}</p>
 
-        <p>
-            <label>Result:</label>
-            <label>Total tax: {{returnData.DmvCalculation.TaxTotalValue}}</label>
-            <label></label>
-            <label></label>
-            <label></label>
-        </p>*@
+            <p>
+                <label>Result:</label>
+                <label>Total tax: {{returnData.DmvCalculation.TaxTotalValue}}</label>
+                <label></label>
+                <label></label>
+                <label></label>
+            </p>*@
 
     </form>
 
-    <a href="#/CalculatorLite">DMV izračun Avto</a>
+    <a href="#/CalculatorLite">DMV izračun Avto &raquo;</a>
 </div>

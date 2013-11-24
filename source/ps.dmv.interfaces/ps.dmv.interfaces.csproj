@@ -63,14 +63,17 @@
     <Compile Include="Managers\IDmvCalculationManager.cs" />
     <Compile Include="Managers\IMobileDeManager.cs" />
     <Compile Include="Managers\ISecurityManager.cs" />
+    <Compile Include="Managers\IStatisticsManager.cs" />
     <Compile Include="Processors\IDmvCalculationProcessor.cs" />
     <Compile Include="Processors\IMobileDeProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\IAuthenticationProvider.cs" />
     <Compile Include="Repositories\IDmvCalculationRepository.cs" />
     <Compile Include="Repositories\IEngineTypeRepository.cs" />
     <Compile Include="Repositories\IEuroExhaustTypeRepository.cs" />
     <Compile Include="Repositories\IFuelTypeRepository.cs" />
     <Compile Include="Repositories\IMobileDeRepository.cs" />
+    <Compile Include="Repositories\IStatisticsRepository.cs" />
     <Compile Include="Repositories\IVehicleTypeRepository.cs" />
   </ItemGroup>
   <ItemGroup />

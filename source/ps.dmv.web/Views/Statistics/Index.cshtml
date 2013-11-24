@@ -1,15 +1,35 @@
-﻿@model dynamic
+﻿@using ps.dmv.web.Infrastructure.Enums
+
+@model dynamic
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Statistike";
 }
 
-<h2>title</h2>
+<h2>Statistike</h2>
 
-- last 10 calculation
+<div class="row">
+    <div class="col-md-6 content-background">
+        @Html.Action(MVC.Home.LatestMobileDeCalculations(DmvConstants.StatisticsMobileDeCalculationsNumber, CalculationDisplayModeEnum.Advanced, null))
+    </div>
 
-- last 10 mobile.de
+    <div class="col-md-6 content-background">
+        @Html.Action(MVC.Statistics.MostPopularCarBrand())
+    </div>
+</div>
 
-- averages
+<div class="row">
+    <div class="col-md-6 content-background">
+        @Html.Action(MVC.Statistics.CalculationFrequency())
+    </div>
 
-- most belowed car
+    <div class="col-md-6 content-background">
+        @Html.Action(MVC.Home.LatestDmvCalculations(DmvConstants.StatisticsDmvCalculationsNumber, CalculationDisplayModeEnum.Advanced, null))
+    </div>
+</div>
+
+
+
+
+
+

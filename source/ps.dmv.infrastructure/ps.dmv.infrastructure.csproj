@@ -126,6 +126,7 @@
     <Compile Include="Repositories\EngineTypeRepository.cs" />
     <Compile Include="Repositories\EuroExhaustTypeRepository.cs" />
     <Compile Include="Repositories\FuelTypeRepository.cs" />
+    <Compile Include="Repositories\StatisticsRepository.cs" />
     <Compile Include="Repositories\MobileDeRepository.cs" />
     <Compile Include="Repositories\VehicleTypeRepository.cs" />
     <Compile Include="VehicleType.cs">

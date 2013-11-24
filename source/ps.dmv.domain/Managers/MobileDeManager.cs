@@ -20,6 +20,15 @@ namespace ps.dmv.domain.application.Managers
     /// </summary>
     public class MobileDeManager : IMobileDeManager
     {
+        private IMobileDeRepository _mobileDeRepository = null;
+        private IDmvCalculationManager _dmvCalculationManager = null;
+
+        public MobileDeManager()
+        {
+            _mobileDeRepository = ServiceLocator.Instance.Resolve<IMobileDeRepository>();
+            _dmvCalculationManager = ServiceLocator.Instance.Resolve<IDmvCalculationManager>();
+        }
+
         /// <summary>
         /// Imports the car data.
         /// </summary>
@@ -29,28 +38,45 @@ namespace ps.dmv.domain.application.Managers
         {
             MobileDeCar mobileDeCar = await ServiceLocator.Instance.Resolve<IMobileDeProcessor>().ImportCarFromMobileDe(importMobileDe);
 
-            DmvCalculationResult dmvCalculationResult = await ServiceLocator.Instance.Resolve<IDmvCalculationManager>().ProcessDmvTaxValueResult(mobileDeCar.DmvCalculation);
+            DmvCalculationResult dmvCalculationResult = await _dmvCalculationManager.ProcessDmvTaxValueResult(mobileDeCar.DmvCalculation);
             mobileDeCar.DmvCalculationId = dmvCalculationResult.DmvCalculation.Id;
             mobileDeCar.DmvCalculation = null;
-            mobileDeCar.CreatedOn = DateTime.Now;
-            
-            mobileDeCar = await ServiceLocator.Instance.Resolve<IMobileDeRepository>().Save(mobileDeCar);
+            mobileDeCar.CreatedOn = DateTime.UtcNow;
+
+            mobileDeCar = await _mobileDeRepository.Save(mobileDeCar);
             dmvCalculationResult.MobileDeCar = mobileDeCar;
 
             dmvCalculationResult.DmvCalculation.MobileDeCarId = mobileDeCar.Id;
-            dmvCalculationResult = await ServiceLocator.Instance.Resolve<IDmvCalculationManager>().Update(dmvCalculationResult.DmvCalculation);
+            dmvCalculationResult = await _dmvCalculationManager.Update(dmvCalculationResult.DmvCalculation);
 
             return dmvCalculationResult;
         }
 
+        /// <summary>
+        /// Gets all.
+        /// </summary>
+        /// <param name="pageIndex">Index of the page.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
         public PagedList<MobileDeCar> GetAll(int pageIndex, int pageSize)
         {
-            throw new NotImplementedException();
+            PagedList<MobileDeCar> mobileDeCarList = _mobileDeRepository.GetAll(pageIndex, pageSize);
+
+            return mobileDeCarList;
         }
 
+        /// <summary>
+        /// Gets the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
         public MobileDeCar Get(int id)
         {
-            throw new NotImplementedException();
+            MobileDeCar mobileDeCar = _mobileDeRepository.Get(id);
+
+            return mobileDeCar;
         }
     }
 }

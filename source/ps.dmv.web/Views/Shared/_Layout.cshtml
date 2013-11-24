@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - DMV Info</title>
+    <link rel="favicon" href="/favicon.ico" />
+    <title>DMV Portal - @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -16,16 +17,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("DMV Info", "Index", "Home", null, new { @class = "navbar-brand" })
+                @Html.ActionLink("DMV Portal", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Dmv Calculator", "Index", "Dmv")</li>
-                    <li>@Html.ActionLink("Mobile.de import", "Index", "ExternalImportCarData")</li>
-                    <li>@Html.ActionLink("Statistics", "Index", "Statistics")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Izračunaj si DMV", "Index", "Dmv")</li>
+                    <li>@Html.ActionLink("Uvozi za izračun", "Index", "ExternalImportCarData")</li>
+                    <li>@Html.ActionLink("Statistike", "Index", "Statistics")</li>
+                    <li>@Html.ActionLink("O Nas", "O-Nas", "Home")</li>
+                    <li>@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -35,7 +35,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - DMV Calculator</p>
+            <p>&copy; @DateTime.UtcNow.Year - <a href="@Url.Action(MVC.Home.About())">DMV Portal</a></p>
         </footer>
     </div>
 
@@ -53,11 +53,40 @@
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
             }, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-45633433-1', 'azurewebsites.net');
         ga('send', 'pageview');
+
+
+
+
+        $(function () {
+
+            var cookieScripts = function() {
+                // Internal javascript called
+                console.log("Running");
+
+                // Loading external javascript file
+                $.cookiesDirective.loadScript({
+                    uri: 'external.js',
+                    appendTo: 'eantics'
+                });
+            };
+
+            $.cookiesDirective({
+                privacyPolicyUri: '/Home/O-Nas',
+                explicitConsent: false,
+                position: 'bottom',
+                scriptWrapper: cookieScripts,
+                cookieScripts: 'Google Analytics, Authentication ',
+                backgroundColor: '#52B54A',
+                linkColor: '#ffffff'
+            });
+        });
+
+        
 
     </script>
 </body>

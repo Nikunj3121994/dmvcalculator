@@ -32,7 +32,8 @@ namespace ps.dmv.web.App_Start
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/external").Include(
-                        "~/Scripts/external/pace.js"
+                        "~/Scripts/external/pace.js",
+                        "~/Scripts/external/jquery.cookiesdirective.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(

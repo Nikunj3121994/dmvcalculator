@@ -41,11 +41,17 @@ namespace ps.dmv.web.Controllers
             return mobileDeCarList;
         }
 
+        /// <summary>
+        /// Puts the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="importMobileDe">The import mobile de.</param>
+        /// <returns></returns>
         public HttpResponseMessage Put(int id, ImportMobileDe importMobileDe)
         {
             _mobileDeManager.ImportCarData(importMobileDe);
 
-            HttpResponseMessage httpResponseMessage = new HttpResponseMessage();
+            HttpResponseMessage httpResponseMessage = new HttpResponseMessage() { StatusCode = HttpStatusCode.OK };
 
             //TODO: add proper response message
 

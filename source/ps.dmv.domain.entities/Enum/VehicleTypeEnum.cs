@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ps.dmv.domain.data.Enum
 {
+    /// <summary>
+    /// VehicleTypeEnum
+    /// </summary>
     public enum VehicleTypeEnum
     {
         [Description("Avto")]

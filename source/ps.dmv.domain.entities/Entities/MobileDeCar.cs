@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The URL.
         /// </value>
+        [DisplayName("Naslov")]
         public string Url { get; set; }
 
         /// <summary>
@@ -49,6 +51,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The maker.
         /// </value>
+        [DisplayName("Proizvajalec")]
         public string Maker { get; set; }
 
         /// <summary>
@@ -57,6 +60,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The model.
         /// </value>
+        [DisplayName("Model")]
         public string Model { get; set; }
 
         /// <summary>
@@ -89,6 +93,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The created on.
         /// </value>
+        [DisplayName("Datum izračuna")]
         public DateTime CreatedOn { get; set; }
 
         /// <summary>
@@ -97,6 +102,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The image URL.
         /// </value>
+        [DisplayName("Slika avtomobila")]
         public string ImageUrl { get; set; }
     }
 }

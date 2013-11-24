@@ -70,6 +70,14 @@ namespace ps.dmv.web.Controllers
         }
 
 
+        static readonly ActionParamsClass_Index s_params_Index = new ActionParamsClass_Index();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Index IndexParams { get { return s_params_Index; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Index
+        {
+            public readonly string importMobileDe = "importMobileDe";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -98,6 +106,16 @@ namespace ps.dmv.web.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
             return callInfo;
+        }
+
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, ps.dmv.domain.data.Entities.ImportMobileDe importMobileDe);
+
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Index(ps.dmv.domain.data.Entities.ImportMobileDe importMobileDe)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "importMobileDe", importMobileDe);
+            IndexOverride(callInfo, importMobileDe);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
     }

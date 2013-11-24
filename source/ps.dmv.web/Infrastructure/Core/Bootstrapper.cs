@@ -7,8 +7,10 @@ using ps.dmv.domain.application.Processors;
 using ps.dmv.infrastructure.Repositories;
 using ps.dmv.interfaces.Managers;
 using ps.dmv.interfaces.Processors;
+using ps.dmv.interfaces.Providers;
 using ps.dmv.interfaces.Repositories;
 using ps.dmv.web.Controllers;
+using ps.dmv.web.Infrastructure.Security;
 
 namespace ps.dmv.web.Infrastructure.Core
 {
@@ -43,6 +45,7 @@ namespace ps.dmv.web.Infrastructure.Core
             container.RegisterType<IDmvCalculationManager, DmvCalculationManager>();
             container.RegisterType<ICodeTableManager, CodeTableManager>();
             container.RegisterType<IMobileDeManager, MobileDeManager>();
+            container.RegisterType<IStatisticsManager, StatisticsManager>();
 
             // Repositories
             container.RegisterType<IDmvCalculationRepository, DmvCalculationRepository>();
@@ -51,6 +54,7 @@ namespace ps.dmv.web.Infrastructure.Core
             container.RegisterType<IEuroExhaustTypeRepository, EuroExhaustTypeRepository>();
             container.RegisterType<IFuelTypeRepository, FuelTypeRepository>();
             container.RegisterType<IMobileDeRepository, MobileDeRepository>();
+            container.RegisterType<IStatisticsRepository, StatisticsRepository>();
 
             // Processors
             container.RegisterType<IDmvCalculationProcessor, DmvCalculationProcessor>();
@@ -58,6 +62,7 @@ namespace ps.dmv.web.Infrastructure.Core
 
             // Providers
             container.RegisterType<IUserProvider, UserProvider>();
+            container.RegisterType<IAuthenticationProvider, AuthenticationProvider>();
 
             return container;
         }

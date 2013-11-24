@@ -9,20 +9,33 @@ using ps.dmv.interfaces.Repositories;
 
 namespace ps.dmv.infrastructure.Repositories
 {
+    /// <summary>
+    /// FuelTypeRepository
+    /// </summary>
     public class FuelTypeRepository : IFuelTypeRepository
     {
-        private DmvEntities _db = null;
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FuelTypeRepository"/> class.
+        /// </summary>
         public FuelTypeRepository()
         {
-            _db = new DmvEntities();
+
         }
 
+        /// <summary>
+        /// Gets all.
+        /// </summary>
+        /// <returns></returns>
         public List<CodeTableItem> GetAll()
         {
             Mapper.CreateMap<FuelType, CodeTableItem>();
 
-            List<FuelType> fuelTypeList = _db.FuelType.ToList();
+            List<FuelType> fuelTypeList = null;
+
+            using (DmvEntities db = new DmvEntities())
+            {
+                fuelTypeList = db.FuelType.ToList();
+            }
 
             List<CodeTableItem> codeTableItems = Mapper.Map<List<FuelType>, List<CodeTableItem>>(fuelTypeList);
 

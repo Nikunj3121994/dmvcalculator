@@ -71,6 +71,7 @@
     <Compile Include="Managers\DmvCalculationManager.cs" />
     <Compile Include="Managers\MobileDeManager.cs" />
     <Compile Include="Managers\SecurityManager.cs" />
+    <Compile Include="Managers\StatisticsManager.cs" />
     <Compile Include="Processors\MobileDeProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Processors\DmvCalculationProcessor.cs" />

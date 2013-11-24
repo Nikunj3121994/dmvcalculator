@@ -1,0 +1,33 @@
+﻿@model CalculationFrequencyStatistics
+
+<h3>Frekvenca izračunov</h3>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+        @{
+            @:var serverData = [['Iteration', 'Količina izračunov'],
+            foreach (DateTime key in this.Model.CalculationFrequencyData.Keys)
+            {
+                @:['@key', @this.Model.CalculationFrequencyData[key]],
+            }
+        @:]
+        }
+
+        var dataFreq = google.visualization.arrayToDataTable(serverData);
+
+        var options = {
+            title: 'Frekvenca izračunov',
+            'width': 400,
+            'height': 300
+        };
+
+        var chartFreq = new google.visualization.LineChart(document.getElementById('chart_div_calculation_frequency'));
+        chartFreq.draw(dataFreq, options);
+    }
+</script>
+
+<div id="chart_div_calculation_frequency"></div>

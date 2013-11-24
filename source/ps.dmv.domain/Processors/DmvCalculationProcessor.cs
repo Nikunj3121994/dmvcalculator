@@ -205,7 +205,7 @@ namespace ps.dmv.domain.application.Processors
                 {
                     taxRate = 13;
                 }
-                else if (powerKw > 190)
+                else if (powerKw > 120)
                 {
                     taxRate = 18;
                 }

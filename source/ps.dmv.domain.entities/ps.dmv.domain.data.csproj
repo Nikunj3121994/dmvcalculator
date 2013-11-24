@@ -47,10 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\CalculationFrequencyStatistics.cs" />
     <Compile Include="Entities\DmvCalculation.cs" />
     <Compile Include="Entities\DmvCalculationResult.cs" />
     <Compile Include="Entities\ImportMobileDe.cs" />
     <Compile Include="Entities\MobileDeCar.cs" />
+    <Compile Include="Entities\CarManufacturerNumberStatistics.cs" />
     <Compile Include="Enum\CodeTableType.cs" />
     <Compile Include="Enum\EngineTypeEnum.cs" />
     <Compile Include="Enum\EuroExhaustTypeEnum.cs" />

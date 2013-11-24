@@ -111,14 +111,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Url" Type="nvarchar" MaxLength="800" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="2000" Nullable="false" />
           <Property Name="DmvCalculationId" Type="int" Nullable="false" />
           <Property Name="Maker" Type="nvarchar" MaxLength="200" />
           <Property Name="Model" Type="nvarchar" MaxLength="200" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
-          <Property Name="ImageUrl" Type="nvarchar" MaxLength="800" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="2000" />
         </EntityType>
         <EntityType Name="VehicleType">
           <Key>
@@ -558,7 +558,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Url" Type="String" Nullable="false" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="DmvCalculationId" Type="Int32" Nullable="false" />
           <Property Name="Maker" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Model" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
@@ -568,7 +568,7 @@
           <NavigationProperty Name="DmvCalculation" Relationship="ps.dmv.infrastructure.dbModel.FK_MobileDeCar_DmvCalculation" FromRole="MobileDeCar" ToRole="DmvCalculation" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="DmvCalculation1" Relationship="ps.dmv.infrastructure.dbModel.FK_DmvCalculation_MobileDeCar" FromRole="MobileDeCar" ToRole="DmvCalculation" />
-          <Property Name="ImageUrl" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="ImageUrl" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_DmvCalculation_AspNetUsers">
           <End Type="ps.dmv.infrastructure.dbModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />

@@ -61,12 +61,16 @@ namespace ps.dmv.web.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string MostPopularCarBrand = "MostPopularCarBrand";
+            public readonly string CalculationFrequency = "CalculationFrequency";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string MostPopularCarBrand = "MostPopularCarBrand";
+            public const string CalculationFrequency = "CalculationFrequency";
         }
 
 
@@ -80,8 +84,12 @@ namespace ps.dmv.web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _CalculationFrequency = "_CalculationFrequency";
+                public readonly string _MostPopularCarBrand = "_MostPopularCarBrand";
                 public readonly string Index = "Index";
             }
+            public readonly string _CalculationFrequency = "~/Views/Statistics/_CalculationFrequency.cshtml";
+            public readonly string _MostPopularCarBrand = "~/Views/Statistics/_MostPopularCarBrand.cshtml";
             public readonly string Index = "~/Views/Statistics/Index.cshtml";
         }
     }
@@ -97,6 +105,24 @@ namespace ps.dmv.web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void MostPopularCarBrandOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult MostPopularCarBrand()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.MostPopularCarBrand);
+            MostPopularCarBrandOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void CalculationFrequencyOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult CalculationFrequency()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.CalculationFrequency);
+            CalculationFrequencyOverride(callInfo);
             return callInfo;
         }
 

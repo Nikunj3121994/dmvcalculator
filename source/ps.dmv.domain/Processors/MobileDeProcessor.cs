@@ -34,7 +34,7 @@ namespace ps.dmv.domain.application.Processors
 
             mobileDeCar.Url = importMobileDe.Url;
             mobileDeCar.DmvCalculation.VehicleTypeId = importMobileDe.VehicleTypeId;
-            mobileDeCar.DmvCalculation.DateOfCalculation = DateTime.Now;
+            mobileDeCar.DmvCalculation.DateOfCalculation = DateTime.UtcNow;
             mobileDeCar.DmvCalculation.EngineTypeId = EngineTypeEnum.FourTactsRest;
             mobileDeCar.UserId = ServiceLocator.Instance.Resolve<IUserProvider>().GetCurrentUserId();
             
@@ -63,6 +63,11 @@ namespace ps.dmv.domain.application.Processors
                 resultNode = webPageParser.GetWebPageNodeStringContent(webPageNode);
                 mobileDeCar.DmvCalculation.EuroExhaustTypeId = EnumHelper.GetEnumValue<EuroExhaustTypeEnum>(resultNode);
             }
+            else
+            {
+                // Defaut EURO
+                mobileDeCar.DmvCalculation.EuroExhaustTypeId = EuroExhaustTypeEnum.Euro1;
+            }
 
             //By law every EURO5+ have to have DPF filter, most of them had for the EURO4
             if ((int)mobileDeCar.DmvCalculation.EuroExhaustTypeId < 4)
@@ -70,8 +75,11 @@ namespace ps.dmv.domain.application.Processors
                 mobileDeCar.DmvCalculation.DieselParticlesAbove005Limit = true;
             }
 
+            // Set default and handlig of the FuelType
+            mobileDeCar.DmvCalculation.FuelTypeId = FuelTypeEnum.PetrolRest;
             webPageNode = webPageParser.GetWebPageNode("p>\nPetrol");
             webPageNode = webPageNode ?? webPageParser.GetWebPageNode("p>\nBenzin");
+            webPageNode = webPageNode ?? webPageParser.GetWebPageNode("p>\nHybrid (Benzin");
             if (webPageNode != null)
             {
                 resultNode = webPageParser.GetWebPageNodeStringContent(webPageNode);
@@ -79,6 +87,7 @@ namespace ps.dmv.domain.application.Processors
             }
 
             webPageNode = webPageParser.GetWebPageNode("p>\nDiesel");
+            webPageNode = webPageNode ?? webPageParser.GetWebPageNode("p>\nHybrid (Diesel");
             if (webPageNode != null)
             {
                 resultNode = webPageParser.GetWebPageNodeStringContent(webPageNode);

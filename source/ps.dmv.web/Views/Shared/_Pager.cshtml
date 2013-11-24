@@ -1,0 +1,32 @@
+﻿@model List<PagerItem>
+
+<div class="news_post_pager">
+    <ul>
+        @foreach (PagerItem item in this.Model)
+        {
+            switch (item.Type)
+            {
+                case PagerItemType.Page:
+                    <li><a href="@item.Url">@item.Title</a></li>
+                    break;
+                case PagerItemType.SelectedPage:
+                    <li class="selected"><span>@item.Title</span></li>
+                    break;
+                case PagerItemType.Separator:
+                    <li class="separator"><span>@item.Title</span></li>
+                    break;
+                case PagerItemType.Previous:
+                    <li class="previous"><a href="@item.Url">@item.Title</a></li>
+                    break;
+                case PagerItemType.Next:
+                    <li class="next"><a href="@item.Url">@item.Title</a></li>
+                    break;
+            }
+        }
+    </ul>
+</div>
+
+@*<div style="display:inline;">
+    @Html.Partial(MVC.Shared.Views._Pager, PagkerItem.GeneratePagerItems(this.Model.TotalPageCount, this.Model.CurrentPageIndex + 1, "?index={0}"))
+    @Html.Partial(MVC.Shared.Views._Pager, PagkerItem.GeneratePagerItems(this.Model.TotalPageCount, this.Model.CurrentPageIndex + 1, "?index={0}"))
+</div>*@

@@ -1,0 +1,12 @@
+﻿@model PagedList<MobileDeCar>
+
+<h3>Zadnji mobile.de izračuni</h3>
+
+<div>
+    <ul>
+        @foreach (MobileDeCar mobileDeCar in this.Model)
+        {
+            <li><a href="@Url.Action(MVC.Dmv.DmvCalculationResult(mobileDeCar.DmvCalculationId))">@mobileDeCar.Model</a> (@mobileDeCar.CreatedOn)</li>
+        }
+    </ul>
+</div>

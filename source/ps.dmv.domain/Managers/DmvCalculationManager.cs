@@ -47,7 +47,7 @@ namespace ps.dmv.domain.application.Managers
         {
             DmvCalculation dmvCalculationCalculated = ServiceLocator.Instance.Resolve<IDmvCalculationProcessor>().CalculateDmvAll(dmvCalculation);
 
-            dmvCalculationCalculated.CreatedOn = DateTime.Now;
+            dmvCalculationCalculated.CreatedOn = DateTime.UtcNow;
 
             dmvCalculationCalculated = await _dmvCalculationRepository.Save(dmvCalculationCalculated);
 

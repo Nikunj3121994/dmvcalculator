@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using ps.dmv.domain.data.Enum;
 
 namespace ps.dmv.domain.data.Entities
@@ -22,6 +23,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The date of calculation.
         /// </value>
+        [DisplayName("Datum izračuna")]
         public DateTime DateOfCalculation { get; set; }
 
         /// <summary>
@@ -30,6 +32,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The vehicle type identifier.
         /// </value>
+        [DisplayName("Vozilo")]
         public VehicleTypeEnum VehicleTypeId { get; set; }
 
         /// <summary>
@@ -38,6 +41,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The fuel type identifier.
         /// </value>
+        [DisplayName("Gorivo")]
         public FuelTypeEnum FuelTypeId { get; set; }
 
         /// <summary>
@@ -46,6 +50,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The co2 emissions value.
         /// </value>
+        [DisplayName("Co2 izpusti")]
         public short Co2EmissionsValue { get; set; }
 
         /// <summary>
@@ -54,6 +59,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The euro exhaust type identifier.
         /// </value>
+        [DisplayName("EURO izpuh")]
         public EuroExhaustTypeEnum EuroExhaustTypeId { get; set; }
 
         /// <summary>
@@ -62,6 +68,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// <c>true</c> if [at least eight seats vehicle]; otherwise, <c>false</c>.
         /// </value>
+        [DisplayName("Najmanj vozilo z 8 sedeži")]
         public bool AtLeastEightSeatsVehicle { get; set; }
 
         /// <summary>
@@ -70,6 +77,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// <c>true</c> if [diesel particles above005 limit]; otherwise, <c>false</c>.
         /// </value>
+        [DisplayName("Brez DPF filtra")]
         public bool DieselParticlesAbove005Limit { get; set; }
 
         /// <summary>
@@ -78,6 +86,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The engine power kw.
         /// </value>
+        [DisplayName("Moc motorja [kw]")]
         public int EnginePowerKw { get; set; }
 
         /// <summary>
@@ -86,6 +95,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The engine displacement CCM.
         /// </value>
+        [DisplayName("Prostornina motorja [ccm]")]
         public int EngineDisplacementCcm { get; set; }
 
         /// <summary>
@@ -94,6 +104,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The engine type identifier.
         /// </value>
+        [DisplayName("Tip motorja")]
         public EngineTypeEnum EngineTypeId { get; set; }
 
         /// <summary>
@@ -102,6 +113,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The vehicle value.
         /// </value>
+        [DisplayName("Cena vozila")]
         public double VehicleValue { get; set; }
 
         /// <summary>
@@ -110,6 +122,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The base tax rate.
         /// </value>
+        [DisplayName("Osnovni davek [%]")]
         public double BaseTaxRate { get; set; }
 
         /// <summary>
@@ -118,6 +131,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The base tax rate value.
         /// </value>
+        [DisplayName("Znesek osnovnega davka")]
         public double BaseTaxRateValue { get; set; }
 
         /// <summary>
@@ -126,6 +140,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The additional tax rate.
         /// </value>
+        [DisplayName("Dodatni davek [%]")]
         public double AdditionalTaxRate { get; set; }
 
         /// <summary>
@@ -134,6 +149,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The additional tax rate value.
         /// </value>
+        [DisplayName("Znesek dodatnega davka")]
         public double AdditionalTaxRateValue { get; set; }
 
         /// <summary>
@@ -142,6 +158,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The tax total value.
         /// </value>
+        [DisplayName("Znesek celotnega davka")]
         public double TaxTotalValue { get; set; }
 
         /// <summary>
@@ -150,9 +167,22 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The total vehicle value with tax.
         /// </value>
+        [DisplayName("Končni znesek vozila z davkom")]
         public double TotalVehicleValueWithTax
         {
             get { return this.VehicleValue + this.TaxTotalValue; }
+        }
+
+        /// <summary>
+        /// Gets the total vehicle tax rate.
+        /// </summary>
+        /// <value>
+        /// The total vehicle tax rate.
+        /// </value>
+        [DisplayName("Skupni davek [%]")]
+        public double TotalVehicleTaxRate
+        {
+            get { return (this.BaseTaxRate + this.AdditionalTaxRate); }
         }
 
         /// <summary>
@@ -177,6 +207,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The create on.
         /// </value>
+        [DisplayName("Datum izračuna")]
         public DateTime CreatedOn { get; set; }
 
         /// <summary>

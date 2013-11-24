@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,8 @@ namespace ps.dmv.domain.data.Entities
         /// The URL.
         /// </value>
         [Url]
-        [Required]
+        [Required(ErrorMessage = "{0} je obvezno polje")]
+        [DisplayName("URL")]
         public string Url { get; set; }
 
         /// <summary>
@@ -30,6 +32,7 @@ namespace ps.dmv.domain.data.Entities
         /// The vehicle type identifier.
         /// </value>
         [Required]
+        [DisplayName("Vrsta vozila")]
         public VehicleTypeEnum VehicleTypeId { get; set; }
     }
 }

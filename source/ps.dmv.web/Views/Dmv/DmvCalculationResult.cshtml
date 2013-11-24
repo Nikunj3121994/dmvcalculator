@@ -1,81 +1,87 @@
 ﻿@model DmvCalculationResult
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "DMV Izračun";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div ng-controller="dmvCalculationController">
-    <h3>Dmv calculation result</h3>
+<h3>DMV Izračun</h3>
 
-    <div>
-
-        @if (this.Model.MobileDeCar != null)
-        {
-            <ul>
+<div class="row content-background dmvcalculationresult">
+    <div class="col-md-6">
+        <ul class="list-unstyled">
+            @if (this.Model.MobileDeCar != null)
+            {
                 <li>
-                    <label>Id</label>
-                    <span>@this.Model.MobileDeCar.Id</span>
+                    @Html.LabelFor(model => model.MobileDeCar.CreatedOn)
+                    @Html.SpanFor(model => model.MobileDeCar.CreatedOn)
                 </li>
                 <li>
-                    <label>Datum izračuna</label>
-                    <span>@this.Model.MobileDeCar.CreatedOn</span>
-                </li>
-                <li>
-                    <label>Model</label>
+                    @Html.LabelFor(model => model.MobileDeCar.Model)
                     <span><a href="@this.Model.MobileDeCar.Url">@this.Model.MobileDeCar.Model</a></span>
                 </li>
-                <li>
-                    <label>Picture</label>
-                    <span><img src="@this.Model.MobileDeCar.ImageUrl"/></span>
-                </li>
-            </ul>
-        }
-
-        <ul>
+            }
             <li>
-                <label>Id</label>
-                <span>@this.Model.DmvCalculation.Id</span>
+                @Html.LabelFor(model => model.DmvCalculation.CreatedOn)
+                @Html.SpanFor(model => model.DmvCalculation.CreatedOn)
             </li>
             <li>
-                <label>Datum izračuna</label>
-                <span>@this.Model.DmvCalculation.CreatedOn</span>
+                @Html.LabelFor(model => model.DmvCalculation.VehicleTypeId)
+                @Html.SpanFor(model => model.DmvCalculation.VehicleTypeId.ToString())
             </li>
             <li>
-                <label>Tip vozila</label>
-                <span>@this.Model.DmvCalculation.VehicleTypeId.ToString()</span>
+                @Html.LabelFor(model => model.DmvCalculation.Co2EmissionsValue)
+                @Html.SpanFor(model => model.DmvCalculation.Co2EmissionsValue)
             </li>
             <li>
-                <label>Co2</label>
-                <span>@this.Model.DmvCalculation.Co2EmissionsValue</span>
+                @Html.LabelFor(model => model.DmvCalculation.EnginePowerKw)
+                @Html.SpanFor(model => model.DmvCalculation.EnginePowerKw)
             </li>
             <li>
-                <label>Moč motorja</label>
-                <span>@this.Model.DmvCalculation.EnginePowerKw</span>
+                @Html.LabelFor(model => model.DmvCalculation.EngineDisplacementCcm)
+                @Html.SpanFor(model => model.DmvCalculation.EngineDisplacementCcm)
+            </li>            
+            <li>
+                @Html.LabelFor(model => model.DmvCalculation.EuroExhaustTypeId)
+                @Html.SpanFor(model => model.DmvCalculation.EuroExhaustTypeId.ToString())
             </li>
             <li>
-                <label>Prostornina</label>
-                <span>@this.Model.DmvCalculation.EngineDisplacementCcm</span>
+                @Html.LabelFor(model => model.DmvCalculation.FuelTypeId)
+                @Html.SpanFor(model => model.DmvCalculation.FuelTypeId.DisplayName())
             </li>
             <li>
-                <label>Vrednost vozila</label>
-                <span>@this.Model.DmvCalculation.VehicleValue</span>
+                @Html.LabelFor(model => model.DmvCalculation.AtLeastEightSeatsVehicle)
+                @Html.SpanFor(model => model.DmvCalculation.AtLeastEightSeatsVehicle ? "Da" : "Ne")
             </li>
             <li>
-                <label>Vsi davki</label>
-                <span>@this.Model.DmvCalculation.TaxTotalValue</span>
+                @Html.LabelFor(model => model.DmvCalculation.VehicleValue)
+                @Html.SpanFor(model => model.DmvCalculation.VehicleValue.ToString("C"))
             </li>
-            <li>
-                <label>Končna cena</label>
-                <span>@this.Model.DmvCalculation.TotalVehicleValueWithTax</span> 
+            <li class="important-data">
+                @Html.LabelFor(model => model.DmvCalculation.TotalVehicleTaxRate)
+                @Html.SpanFor(model => model.DmvCalculation.TotalVehicleTaxRate * 100)
             </li>
-            <li>
-                <label></label>
-                <span></span>
+            <li class="important-data">
+                @Html.LabelFor(model => model.DmvCalculation.TaxTotalValue)
+                @Html.SpanFor(model => model.DmvCalculation.TaxTotalValue.ToString("C"))
+            </li>
+            <li class="important-data">
+                @Html.LabelFor(model => model.DmvCalculation.TotalVehicleValueWithTax)
+                @Html.SpanFor(model => model.DmvCalculation.TotalVehicleValueWithTax.ToString("C"))
             </li>
         </ul>
-
     </div>
-
-    <a href="@Url.Action(MVC.Dmv.Index())">Dmv Calculator</a>
+    <div class="col-md-6">
+        <ul class="list-unstyled">
+            @if (this.Model.MobileDeCar != null)
+            {
+                <li>
+                    @*@Html.LabelFor(model => model.MobileDeCar.ImageUrl)*@
+                    <span><img class="img-rounded" src="@this.Model.MobileDeCar.ImageUrl" /></span>
+                </li>
+            }
+        </ul>
+    </div>
 </div>
+
+<a href="@Url.Action(MVC.Dmv.Index())">Izračunaj si DMV &raquo;</a>

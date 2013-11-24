@@ -8,25 +8,41 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
+using Microsoft.Practices.Unity;
+using ps.dmv.common.Core;
 using ps.dmv.common.Helpers;
 using ps.dmv.common.Security;
 using ps.dmv.interfaces.Managers;
+using ps.dmv.interfaces.Providers;
 using ps.dmv.web.Infrastructure.Core;
 using ps.dmv.web.Infrastructure.Security;
 using ps.dmv.web.Models;
 
 namespace ps.dmv.web.Controllers
 {
+    /// <summary>
+    /// AccountController
+    /// </summary>
     [Authorize]
     public partial class AccountController : BaseDmvController
     {
         private ISecurityManager _securityManager = null;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountController"/> class.
+        /// </summary>
+        /// <param name="securityManager">The security manager.</param>
         public AccountController(ISecurityManager securityManager)
         {
             _securityManager = securityManager;
         }
 
+        /// <summary>
+        /// Gets the _authentication manager.
+        /// </summary>
+        /// <value>
+        /// The _authentication manager.
+        /// </value>
         public IAuthenticationManager _authenticationManager
         {
             get
@@ -35,8 +51,11 @@ namespace ps.dmv.web.Controllers
             }
         }
 
-        //
-        // GET: /Account/Login
+        /// <summary>
+        /// Logins the specified return URL.
+        /// </summary>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [AllowAnonymous]
         public virtual ActionResult Login(string returnUrl)
         {
@@ -45,8 +64,12 @@ namespace ps.dmv.web.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Login
+        /// <summary>
+        /// Logins the specified model.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -58,7 +81,7 @@ namespace ps.dmv.web.Controllers
 
                 if (user != null)
                 {
-                    await new AuthenticationProvider(_authenticationManager, _securityManager).SignInAsync(user, model.RememberMe);
+                    await ServiceLocator.Instance.Resolve<IAuthenticationProvider>(new DependencyOverride(typeof(IAuthenticationManager), _authenticationManager)).SignInAsync(user, model.RememberMe);
                     return RedirectToLocal(returnUrl);
                 }
                 else
@@ -71,16 +94,21 @@ namespace ps.dmv.web.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/Register
+        /// <summary>
+        /// Registers this instance.
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public virtual ActionResult Register()
         {
             return View();
         }
 
-        //
-        // POST: /Account/Register
+        /// <summary>
+        /// Registers the specified model.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -93,7 +121,7 @@ namespace ps.dmv.web.Controllers
 
                 if (result.Succeeded)
                 {
-                    await new AuthenticationProvider(_authenticationManager, _securityManager).SignInAsync(user, isPersistent: false);
+                    await ServiceLocator.Instance.Resolve<IAuthenticationProvider>(new DependencyOverride(typeof(IAuthenticationManager), _authenticationManager)).SignInAsync(user, isPersistent: false);
                     return RedirectToAction(MVC.Home.Index());
                 }
                 else
@@ -106,8 +134,12 @@ namespace ps.dmv.web.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/Disassociate
+        /// <summary>
+        /// Disassociates the specified login provider.
+        /// </summary>
+        /// <param name="loginProvider">The login provider.</param>
+        /// <param name="providerKey">The provider key.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public virtual async Task<ActionResult> Disassociate(string loginProvider, string providerKey)
@@ -126,8 +158,11 @@ namespace ps.dmv.web.Controllers
             return RedirectToAction(MVC.Account.Manage(message));
         }
 
-        //
-        // GET: /Account/Manage
+        /// <summary>
+        /// Manages the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         public virtual ActionResult Manage(ManageMessageIdEnum? message)
         {
             ViewBag.StatusMessage =
@@ -142,8 +177,11 @@ namespace ps.dmv.web.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Manage
+        /// <summary>
+        /// Manages the specified model.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public virtual async Task<ActionResult> Manage(ManageUserViewModel model)
@@ -195,8 +233,12 @@ namespace ps.dmv.web.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/ExternalLogin
+        /// <summary>
+        /// Externals the login.
+        /// </summary>
+        /// <param name="provider">The provider.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -206,8 +248,11 @@ namespace ps.dmv.web.Controllers
             return new ChallengeResult(provider, Url.Action(MVC.Account.ExternalLoginCallback(returnUrl)));
         }
 
-        //
-        // GET: /Account/ExternalLoginCallback
+        /// <summary>
+        /// Externals the login callback.
+        /// </summary>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [AllowAnonymous]
         public virtual async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
@@ -223,7 +268,7 @@ namespace ps.dmv.web.Controllers
 
             if (user != null)
             {
-                await new AuthenticationProvider(_authenticationManager, _securityManager).SignInAsync(user, isPersistent: false);
+                await ServiceLocator.Instance.Resolve<IAuthenticationProvider>(new DependencyOverride(typeof(IAuthenticationManager), _authenticationManager)).SignInAsync(user, isPersistent: false);
                 return RedirectToLocal(returnUrl);
             }
             else
@@ -235,8 +280,11 @@ namespace ps.dmv.web.Controllers
             }
         }
 
-        //
-        // POST: /Account/LinkLogin
+        /// <summary>
+        /// Links the login.
+        /// </summary>
+        /// <param name="provider">The provider.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public virtual ActionResult LinkLogin(string provider)
@@ -245,8 +293,10 @@ namespace ps.dmv.web.Controllers
             return new ChallengeResult(provider, Url.Action(MVC.Account.LinkLoginCallback()), User.Identity.GetUserId());
         }
 
-        //
-        // GET: /Account/LinkLoginCallback
+        /// <summary>
+        /// Links the login callback.
+        /// </summary>
+        /// <returns></returns>
         public virtual async Task<ActionResult> LinkLoginCallback()
         {
             var loginInfo = await _authenticationManager.GetExternalLoginInfoAsync(DmvConstants.XsrfKey, User.Identity.GetUserId());
@@ -266,8 +316,12 @@ namespace ps.dmv.web.Controllers
             return RedirectToAction(MVC.Account.Manage(ManageMessageIdEnum.Error));
         }
 
-        //
-        // POST: /Account/ExternalLoginConfirmation
+        /// <summary>
+        /// Externals the login confirmation.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -296,7 +350,7 @@ namespace ps.dmv.web.Controllers
                     result = await _securityManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
-                        await new AuthenticationProvider(_authenticationManager, _securityManager).SignInAsync(user, isPersistent: false);
+                        await ServiceLocator.Instance.Resolve<IAuthenticationProvider>(new DependencyOverride(typeof(IAuthenticationManager), _authenticationManager)).SignInAsync(user, isPersistent: false);
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -307,25 +361,33 @@ namespace ps.dmv.web.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
+        /// <summary>
+        /// Logs the off.
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public virtual ActionResult LogOff()
         {
-            new AuthenticationProvider(_authenticationManager, _securityManager).SignOut();
+            ServiceLocator.Instance.Resolve<IAuthenticationProvider>(new DependencyOverride(typeof(IAuthenticationManager), _authenticationManager)).SignOut();
 
             return RedirectToAction(MVC.Home.Index());
         }
 
-        //
-        // GET: /Account/ExternalLoginFailure
+        /// <summary>
+        /// Externals the login failure.
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public virtual ActionResult ExternalLoginFailure()
         {
             return View();
         }
 
+        /// <summary>
+        /// Removes the account list.
+        /// </summary>
+        /// <returns></returns>
         [ChildActionOnly]
         public virtual ActionResult RemoveAccountList()
         {
@@ -336,6 +398,10 @@ namespace ps.dmv.web.Controllers
             return (ActionResult)PartialView(MVC.Account.Views._RemoveAccountPartial, linkedAccounts);
         }
 
+        /// <summary>
+        /// Releases unmanaged resources and optionally releases managed resources.
+        /// </summary>
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && _securityManager != null)

@@ -44,21 +44,85 @@ input[type="checkbox"].input-validation-error {
 /*pace.js*/
 
 .pace .pace-progress {
-  background: #29d;
-  position: fixed;
-  z-index: 2000;
-  top: 0;
-  left: 0;
-  height: 2px;
-
-  -webkit-transition: width 1s;
-  -moz-transition: width 1s;
-  -o-transition: width 1s;
-  transition: width 1s;
+    background: #29d;
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    left: 0;
+    height: 2px;
+    -webkit-transition: width 1s;
+    -moz-transition: width 1s;
+    -o-transition: width 1s;
+    transition: width 1s;
 }
 
 .pace-inactive {
-  display: none;
+    display: none;
 }
 
-/*****/
+/**OVERRIDING**/
+
+.navbar-inverse {
+    background-color: #ff5f00;
+    border-color: #ffffff;
+}
+
+    .navbar-inverse .navbar-nav > li > a {
+        font-size: 18px;
+        color: #bc008d;
+    }
+
+    .navbar-inverse .navbar-brand {
+        font-size: 26px;
+        color: #bc008d;
+    }
+
+    .navbar-inverse .navbar-nav > li > a:hover,
+    .navbar-inverse .navbar-nav > li > a:focus {
+        color: #7a005c;
+        background-color: transparent;
+    }
+
+    .navbar-inverse .navbar-brand:hover,
+    .navbar-inverse .navbar-brand:focus {
+        color: #7a005c;
+        background-color: transparent;
+    }
+
+    .navbar-right > li > a {
+        font-size: 12px !important;
+        font-weight: bold;
+        color: #dddddd !important;
+    }
+
+.form-control {
+    display: inline;
+}
+
+/**PAGE SPECIAL**/
+
+.content-background {
+    background-color: #eeeeee;
+    border-radius: 6px;
+    padding: 5px;
+    padding-right: 20px;
+    padding-left: 20px;
+    margin: 10px;
+    width: auto;
+}
+
+.dmvcalculationresult label {
+    font-weight: normal;
+}
+
+.dmvcalculationresult span {
+    font-weight: bold;
+}
+
+.dmvcalculationresult .important-data label {
+    font-size: 16px;
+}
+
+.dmvcalculationresult .important-data span {
+    font-size: 18px;
+}

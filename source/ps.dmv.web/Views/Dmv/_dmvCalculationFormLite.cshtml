@@ -1,13 +1,13 @@
 ﻿<div ng-controller="dmvCalculationController">
-    
+
     Samo za osebna vozila
     <div ng-show="!dataLoaded">
         Loading...
     </div>
 
-    <form name="dmvCalculation" role="form" class="form-horizontal" ng-show="dataLoaded">
+    <form name="dmvCalculation" role="form" class="form-horizontal content-background" ng-show="dataLoaded">
 
-        <div>{{dmvCalculation.init}}</div>
+        @*<div>{{dmvCalculation.init}}</div>*@
         <fieldset ng-cloak>
 
             <div class="form-group">
@@ -62,12 +62,12 @@
                 <span class="error" ng-show="dmvCalculation.vehicleValue.$error.required">*</span>
                 <span class="error" ng-show="dmvCalculation.vehicleValue.$error.pattern">**</span>
             </div>
-
-            <button class="btn btn-default" ng-click="processDmvCalculation(dmvCalculation)">Process</button>
-
+            <div class="col-md-offset-2 col-md-10">
+                <button class="btn btn-primary btn-large" ng-click="processDmvCalculation(dmvCalculation)">Izračunaj</button>
+            </div>
         </fieldset>
 
     </form>
 
-    <a href="#/Calculator">DMV izračun</a>
+    <a href="#/Calculator">DMV razširjen izračun &raquo;</a>
 </div>
