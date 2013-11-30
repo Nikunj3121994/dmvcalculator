@@ -7,17 +7,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB Scripts", "DB Scripts", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Create", "Create", "{53D8438D-B952-43AC-95C8-BE0C8A083E72}"
 	ProjectSection(SolutionItems) = preProject
-		Create model.sql = Create model.sql
+		..\db\Create\Create model.sql = ..\db\Create\Create model.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Delete", "Delete", "{565768E9-F735-4806-90C1-114DBA25D085}"
 	ProjectSection(SolutionItems) = preProject
-		Drop model.sql = Drop model.sql
+		..\db\Delete\Drop model.sql = ..\db\Delete\Drop model.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{14899A61-CD90-4EDF-9844-470A433D15CD}"
 	ProjectSection(SolutionItems) = preProject
-		Insert data.sql = Insert data.sql
+		..\db\Data\Insert data.sql = ..\db\Data\Insert data.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.infrastructure", "ps.dmv.infrastructure\ps.dmv.infrastructure.csproj", "{04FFF786-4F83-4869-B247-42438679AA30}"
@@ -30,18 +30,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.interfaces", "ps.dmv.interfaces\ps.dmv.interfaces.csproj", "{EFB9386D-FA38-429F-A02A-E8108CF7B923}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.web.Tests", "ps.dmv.web.Tests\ps.dmv.web.Tests.csproj", "{515C1884-50B9-405F-8B49-34783C34125B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.web.Tests", "UnitTests\ps.dmv.web.Tests\ps.dmv.web.Tests.csproj", "{515C1884-50B9-405F-8B49-34783C34125B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.web", "ps.dmv.web\ps.dmv.web.csproj", "{008D4935-D523-448F-ABCD-E1BD79AC4478}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.domain.data", "ps.dmv.domain.entities\ps.dmv.domain.data.csproj", "{556CF1BF-64B1-4347-B43C-7E6590DAD2B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.domain.application.Tests", "ps.dmv.domain.application.Tests\ps.dmv.domain.application.Tests.csproj", "{3B9AC440-053F-402F-BD22-17D6A4A71238}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ps.dmv.domain.application.Tests", "UnitTests\ps.dmv.domain.application.Tests\ps.dmv.domain.application.Tests.csproj", "{3B9AC440-053F-402F-BD22-17D6A4A71238}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Update", "Update", "{16713424-8B0F-4D83-8E68-FEC759D2CDEC}"
 	ProjectSection(SolutionItems) = preProject
-		Update1.sql = Update1.sql
-		Update2.sql = Update2.sql
+		..\db\Update\Update1.sql = ..\db\Update\Update1.sql
+		..\db\Update\Update2.sql = ..\db\Update\Update2.sql
 	EndProjectSection
 EndProject
 Global
