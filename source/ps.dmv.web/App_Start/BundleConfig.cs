@@ -59,9 +59,6 @@ namespace ps.dmv.web.App_Start
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"
                       ));
-
-            //TODO: Check why optimations fail on AngularJS
-            BundleTable.EnableOptimizations = false;
         }
     }
 }

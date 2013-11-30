@@ -20,7 +20,7 @@ namespace ps.dmv.domain.data.Entities
         /// <value>
         /// The URL.
         /// </value>
-        [Url]
+        [Url(ErrorMessage = "URL je napačnega formata.")]
         [Required(ErrorMessage = "{0} je obvezno polje")]
         [DisplayName("URL")]
         public string Url { get; set; }

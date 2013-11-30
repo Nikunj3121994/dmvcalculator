@@ -34,8 +34,11 @@ namespace ps.dmv.infrastructure.Repositories
         /// <summary>
         /// Gets all.
         /// </summary>
+        /// <param name="pageIndex">Index of the page.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <param name="includeImportedCalculation"></param>
         /// <returns></returns>
-        public PagedList<Domain.DmvCalculation> GetAll(int pageIndex, int pageSize)
+        public PagedList<Domain.DmvCalculation> GetAll(int pageIndex, int pageSize, bool includeImportedCalculation)
         {
             int count = 0;
 
@@ -45,7 +48,18 @@ namespace ps.dmv.infrastructure.Repositories
             {
                 count = db.DmvCalculation.Where(d => d.IsDeleted == false).Count();
 
-                dmvCalculationDbList = db.DmvCalculation.Include("MobileDeCar").Where(d => d.IsDeleted == false)
+                Func<DmvCalculation, bool> where = null;
+
+                if (includeImportedCalculation)
+                {
+                    where = d => d.IsDeleted == false;
+                }
+                else
+                {
+                    where = d => d.IsDeleted == false && d.MobileDeCarId == null;
+                }
+
+                dmvCalculationDbList = db.DmvCalculation.Include("MobileDeCar").Where(where)
                     .OrderByDescending(d => d.CreatedOn).Skip(pageIndex * pageSize).Take(pageSize).ToList();
             }
 

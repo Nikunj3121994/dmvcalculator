@@ -18,8 +18,9 @@ namespace ps.dmv.interfaces.Managers
         /// </summary>
         /// <param name="pageIndex">Index of the page.</param>
         /// <param name="pageSize">Size of the page.</param>
+        /// <param name="includeImportedCalculation"></param>
         /// <returns></returns>
-        PagedList<DmvCalculation> GetAll(int pageIndex, int pageSize);
+        PagedList<DmvCalculation> GetAll(int pageIndex, int pageSize, bool includeImportedCalculation);
 
         /// <summary>
         /// Processes the DMV tax value result.
@@ -32,8 +33,9 @@ namespace ps.dmv.interfaces.Managers
         /// Gets the last DMV calculation result.
         /// </summary>
         /// <param name="numberOfLastResponses">The number of last responses.</param>
+        /// <param name="includeImportedCalculation"></param>
         /// <returns></returns>
-        List<Task<DmvCalculationResult>> GetLastDmvCalculationResult(int numberOfLastResponses);
+        List<Task<DmvCalculationResult>> GetLastDmvCalculationResult(int numberOfLastResponses, bool includeImportedCalculation);
 
         /// <summary>
         /// Gets the specified identifier.

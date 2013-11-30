@@ -58,7 +58,7 @@ namespace ps.dmv.web.Controllers
 
             int pageIndex = index.HasValue ? index.Value - 1 : 0;
             
-            List<DmvCalculation> dmvCalculationList = ServiceLocator.Instance.Resolve<IDmvCalculationManager>().GetAll(pageIndex, number);
+            List<DmvCalculation> dmvCalculationList = ServiceLocator.Instance.Resolve<IDmvCalculationManager>().GetAll(pageIndex, number, false);
 
             if (calculationDisplayModeEnum == CalculationDisplayModeEnum.Simple)
             {

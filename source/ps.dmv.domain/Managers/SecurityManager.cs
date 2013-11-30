@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using ps.dmv.common.Security;
+using ps.dmv.domain.application.Core;
 using ps.dmv.infrastructure.Models;
 using ps.dmv.interfaces.Managers;
 
 namespace ps.dmv.domain.application.Managers
 {
-    public class SecurityManager : ISecurityManager
+    public class SecurityManager : ManagerBase<object>, ISecurityManager
     {
         public UserManager<ApplicationUser> _userManager { get; private set; }
 

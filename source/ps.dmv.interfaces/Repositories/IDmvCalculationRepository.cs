@@ -19,7 +19,7 @@ namespace ps.dmv.interfaces.Repositories
         /// <param name="pageIndex">Index of the page.</param>
         /// <param name="pageSize">Size of the page.</param>
         /// <returns></returns>
-        PagedList<DmvCalculation> GetAll(int pageIndex, int pageSize);
+        PagedList<DmvCalculation> GetAll(int pageIndex, int pageSize, bool includeImportedCalculation);
 
         /// <summary>
         /// Gets the specified identifier.

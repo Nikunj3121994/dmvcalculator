@@ -6,15 +6,16 @@
 
 <div class="jumbotron">
     <h1>Portal za izračun DMV</h1>
-    <p class="lead">Portal omogoča ročni izračun, kot tudi izračun DMVja na podlagi uvoza iz <a href="http://www.mobile.de">mobile.de</a> portala.</p>
-    
+    <p class="lead">Portal omogoča ročni izračun, kot tudi izračun DMVja na podlagi uvoza s portala <a href="http://www.mobile.de">mobile.de</a>.</p>
+
     <a class="btn btn-lg btn-success" href="@Url.Action(MVC.Dmv.Index())" role="button">Izračunaj si DMV &raquo;</a>
     ali
     <a class="btn btn-lg btn-success" href="@Url.Action(MVC.ExternalImportCarData.Index())" role="button">Uvozi za izračun &raquo;</a>
 </div>
 
 <div class="row">
-    <div class="col-md-4 content-background" style="width: 330px;"> @*//TODO fix style*@
+    <div class="col-md-4 content-background fixed-md-4">
+
         <h2>Zadnje novice</h2>
         <p>
             <ul>
@@ -23,10 +24,10 @@
         </p>
         <p><a href="http://www.durs.gov.si/si/davki_predpisi_in_pojasnila/davek_na_motorna_vozila_pojasnila/" class="btn btn-default">Durs &raquo;</a></p>
     </div>
-    <div class="col-md-4 content-background">
+    <div class="col-md-4 content-background fixed-md-4">
         @Html.Action(MVC.Home.LatestDmvCalculations(DmvConstants.LatestDmvCalculationsNumber, CalculationDisplayModeEnum.Simple, null))
     </div>
-    <div class="col-md-4 content-background">
+    <div class="col-md-4 content-background fixed-md-4">
         @Html.Action(MVC.Home.LatestMobileDeCalculations(DmvConstants.LatestMobileDeCalculationsNumber, CalculationDisplayModeEnum.Simple, null))
     </div>
 </div>

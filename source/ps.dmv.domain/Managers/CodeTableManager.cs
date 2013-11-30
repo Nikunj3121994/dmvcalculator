@@ -1,24 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ps.dmv.common.Core;
 using ps.dmv.common.DataTypes;
+using ps.dmv.domain.application.Core;
 using ps.dmv.domain.data.Enum;
-using ps.dmv.infrastructure;
 using ps.dmv.interfaces.Managers;
 using ps.dmv.interfaces.Repositories;
 
 namespace ps.dmv.domain.application.Managers
 {
-    public class CodeTableManager : ICodeTableManager
+    /// <summary>
+    /// CodeTableManager
+    /// </summary>
+    public class CodeTableManager : ManagerBase<object>, ICodeTableManager
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CodeTableManager"/> class.
+        /// </summary>
         public CodeTableManager()
         {
             
         }
 
+        /// <summary>
+        /// Gets all.
+        /// </summary>
+        /// <param name="codeTableType">Type of the code table.</param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception">Unknown CodeTableType:  + codeTableType</exception>
         public List<CodeTableItem> GetAll(CodeTableType codeTableType)
         {
             List<CodeTableItem> list = new List<CodeTableItem>();

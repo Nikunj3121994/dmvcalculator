@@ -8,6 +8,7 @@ using System.Web;
 using Microsoft.AspNet.Identity;
 using ps.dmv.common.Core;
 using ps.dmv.common.Lists;
+using ps.dmv.domain.application.Core;
 using ps.dmv.domain.data.Entities;
 using ps.dmv.interfaces.Managers;
 using ps.dmv.interfaces.Processors;
@@ -18,7 +19,7 @@ namespace ps.dmv.domain.application.Managers
     /// <summary>
     /// MobileDeManager
     /// </summary>
-    public class MobileDeManager : IMobileDeManager
+    public class MobileDeManager : ManagerBase<MobileDeCar>, IMobileDeManager
     {
         private IMobileDeRepository _mobileDeRepository = null;
         private IDmvCalculationManager _dmvCalculationManager = null;
@@ -43,10 +44,13 @@ namespace ps.dmv.domain.application.Managers
             mobileDeCar.DmvCalculation = null;
             mobileDeCar.CreatedOn = DateTime.UtcNow;
 
+            base.Validate(mobileDeCar);
+
             mobileDeCar = await _mobileDeRepository.Save(mobileDeCar);
             dmvCalculationResult.MobileDeCar = mobileDeCar;
 
             dmvCalculationResult.DmvCalculation.MobileDeCarId = mobileDeCar.Id;
+
             dmvCalculationResult = await _dmvCalculationManager.Update(dmvCalculationResult.DmvCalculation);
 
             return dmvCalculationResult;

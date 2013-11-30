@@ -2,6 +2,7 @@
 using Microsoft.Practices.Unity;
 using ps.dmv.common.Core;
 using ps.dmv.common.Security;
+using ps.dmv.common.Validation;
 using ps.dmv.domain.application.Managers;
 using ps.dmv.domain.application.Processors;
 using ps.dmv.infrastructure.Repositories;
@@ -63,6 +64,7 @@ namespace ps.dmv.web.Infrastructure.Core
             // Providers
             container.RegisterType<IUserProvider, UserProvider>();
             container.RegisterType<IAuthenticationProvider, AuthenticationProvider>();
+            container.RegisterType<IValidationProvider, ValidationProvider>();
 
             return container;
         }

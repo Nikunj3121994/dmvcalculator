@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ps.dmv.common.Core;
 using ps.dmv.common.Helpers;
 using ps.dmv.common.Lists;
+using ps.dmv.domain.application.Core;
 using ps.dmv.domain.data.Entities;
 using ps.dmv.interfaces.Managers;
 using ps.dmv.interfaces.Processors;
@@ -15,7 +16,7 @@ namespace ps.dmv.domain.application.Managers
     /// <summary>
     /// DmvCalculationManager
     /// </summary>
-    public class DmvCalculationManager : IDmvCalculationManager   
+    public class DmvCalculationManager : ManagerBase<DmvCalculation>, IDmvCalculationManager   
     {
         private IDmvCalculationRepository _dmvCalculationRepository = null;
 
@@ -32,10 +33,11 @@ namespace ps.dmv.domain.application.Managers
         /// </summary>
         /// <param name="pageIndex">Index of the page.</param>
         /// <param name="pageSize">Size of the page.</param>
+        /// <param name="includeImportedCalculation"></param>
         /// <returns></returns>
-        public PagedList<DmvCalculation> GetAll(int pageIndex, int pageSize)
+        public PagedList<DmvCalculation> GetAll(int pageIndex, int pageSize, bool includeImportedCalculation)
         {
-            return _dmvCalculationRepository.GetAll(pageIndex, pageSize);
+            return _dmvCalculationRepository.GetAll(pageIndex, pageSize, includeImportedCalculation);
         }
 
         /// <summary>
@@ -49,6 +51,8 @@ namespace ps.dmv.domain.application.Managers
 
             dmvCalculationCalculated.CreatedOn = DateTime.UtcNow;
 
+            base.Validate(dmvCalculationCalculated);
+
             dmvCalculationCalculated = await _dmvCalculationRepository.Save(dmvCalculationCalculated);
 
             DmvCalculationResult dmvCalculationResult = new DmvCalculationResult(dmvCalculationCalculated);
@@ -60,10 +64,11 @@ namespace ps.dmv.domain.application.Managers
         /// Gets the last DMV calculation result.
         /// </summary>
         /// <param name="numberOfLastResponses">The number of last responses.</param>
+        /// <param name="includeImportedCalculation"></param>
         /// <returns></returns>
-        public List<Task<DmvCalculationResult>> GetLastDmvCalculationResult(int numberOfLastResponses)
+        public List<Task<DmvCalculationResult>> GetLastDmvCalculationResult(int numberOfLastResponses, bool includeImportedCalculation)
         {
-            return _dmvCalculationRepository.GetAll(DmvConstants.InitialPageIndex, numberOfLastResponses).Select(async i => await this.ProcessDmvTaxValueResult(i)).ToList();
+            return _dmvCalculationRepository.GetAll(DmvConstants.InitialPageIndex, numberOfLastResponses, includeImportedCalculation).Select(async i => await this.ProcessDmvTaxValueResult(i)).ToList();
         }
 
         /// <summary>
@@ -86,6 +91,8 @@ namespace ps.dmv.domain.application.Managers
         /// <exception cref="System.NotImplementedException"></exception>
         public async Task<DmvCalculationResult> Update(DmvCalculation dmvCalculation)
         {
+            base.Validate(dmvCalculation);
+
             DmvCalculation dmvCalculationFromDb = await _dmvCalculationRepository.Update(dmvCalculation);
 
             return new DmvCalculationResult(dmvCalculationFromDb);

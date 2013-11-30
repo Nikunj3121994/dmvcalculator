@@ -111,6 +111,14 @@ input[type="checkbox"].input-validation-error {
     width: auto;
 }
 
+.fixed-md-4 {
+    max-width: 368px;
+}
+
+.fixed-md-6 {
+    max-width: 550px;
+}
+
 .dmvcalculationresult label {
     font-weight: normal;
 }

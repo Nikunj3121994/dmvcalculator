@@ -111,6 +111,9 @@ namespace ps.dmv.domain.application.Processors
             webPageNode = webPageParser.GetWebPageNode("h1>\n");
             if (webPageNode != null)
             {
+                mobileDeCar.Model = "Not known";
+                mobileDeCar.Maker = "Not known";
+
                 resultNode = webPageParser.GetWebPageNodeStringContent(webPageNode);
                 mobileDeCar.Model = resultNode;
                 mobileDeCar.Maker = resultNode.Split(' ').FirstOrDefault();

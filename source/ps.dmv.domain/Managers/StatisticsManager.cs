@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ps.dmv.common.Core;
+using ps.dmv.domain.application.Core;
 using ps.dmv.domain.data.Entities;
 using ps.dmv.interfaces.Managers;
 using ps.dmv.interfaces.Repositories;
@@ -13,7 +14,7 @@ namespace ps.dmv.domain.application.Managers
     /// <summary>
     /// StatisticsManager
     /// </summary>
-    public class StatisticsManager : IStatisticsManager
+    public class StatisticsManager : ManagerBase<object>, IStatisticsManager
     {
         private IStatisticsRepository _statisticsRepository = null;
 

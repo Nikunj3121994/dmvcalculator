@@ -36,10 +36,11 @@ namespace ps.dmv.web.Controllers
         /// </summary>
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="pageIndex">Index of the page.</param>
+        /// <param name="includeImportedCalculation"></param>
         /// <returns></returns>
-        public PagedList<DmvCalculation> Get([FromUri]int pageSize, [FromUri]int pageIndex)
+        public PagedList<DmvCalculation> Get([FromUri]int pageSize, [FromUri]int pageIndex, [FromUri]bool includeImportedCalculation)
         {
-            PagedList<DmvCalculation> dmvCalculations = _dmvCalculationManager.GetAll(pageSize, pageIndex);
+            PagedList<DmvCalculation> dmvCalculations = _dmvCalculationManager.GetAll(pageSize, pageIndex, includeImportedCalculation);
 
             return dmvCalculations;
         }
@@ -68,6 +69,10 @@ namespace ps.dmv.web.Controllers
             HttpResponseMessage httpResponseMessage = new HttpResponseMessage();
 
             //TODO: Get base from *
+
+            //var response = Request.CreateResponse(HttpStatusCode.OK, createdItemId);
+            //response.Headers.Location = new Uri(Url.Link("SomeRoutes", new { id = createdItem }));
+
             httpResponseMessage.StatusCode = HttpStatusCode.OK;
             //httpResponseMessage.Headers.Location = new Uri("");
             httpResponseMessage.Content = new StringContent(JsonConvert.SerializeObject(dmvCalculationResult));
