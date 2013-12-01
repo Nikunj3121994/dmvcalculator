@@ -62,21 +62,10 @@ namespace ps.dmv.web.Controllers
         /// <returns></returns>
         public async Task<HttpResponseMessage> Post(DmvCalculation dmvCalculation)
         {
-            //DmvCalculationResult dmvCalculationResult = AsyncHelpers.RunSync(() =>_dmvCalculationManager.ProcessDmvTaxValueResult(dmvCalculation));
-
             DmvCalculationResult dmvCalculationResult = await _dmvCalculationManager.ProcessDmvTaxValueResult(dmvCalculation);
 
-            HttpResponseMessage httpResponseMessage = new HttpResponseMessage();
+            HttpResponseMessage httpResponseMessage = base.GetHttpResponseMessage(dmvCalculationResult);
 
-            //TODO: Get base from *
-
-            //var response = Request.CreateResponse(HttpStatusCode.OK, createdItemId);
-            //response.Headers.Location = new Uri(Url.Link("SomeRoutes", new { id = createdItem }));
-
-            httpResponseMessage.StatusCode = HttpStatusCode.OK;
-            //httpResponseMessage.Headers.Location = new Uri("");
-            httpResponseMessage.Content = new StringContent(JsonConvert.SerializeObject(dmvCalculationResult));
-            
             return httpResponseMessage;
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Policy;
+using System.Threading.Tasks;
 using System.Web.Http;
 using ps.dmv.common.Core;
 using ps.dmv.common.Lists;
@@ -47,13 +48,11 @@ namespace ps.dmv.web.Controllers
         /// <param name="id">The identifier.</param>
         /// <param name="importMobileDe">The import mobile de.</param>
         /// <returns></returns>
-        public HttpResponseMessage Put(int id, ImportMobileDe importMobileDe)
+        public async Task<HttpResponseMessage> Put(int id, ImportMobileDe importMobileDe)
         {
-            _mobileDeManager.ImportCarData(importMobileDe);
+            DmvCalculationResult dmvCalculationResult = await _mobileDeManager.ImportCarData(importMobileDe);
 
-            HttpResponseMessage httpResponseMessage = new HttpResponseMessage() { StatusCode = HttpStatusCode.OK };
-
-            //TODO: add proper response message
+            HttpResponseMessage httpResponseMessage = base.GetHttpResponseMessage(dmvCalculationResult);
 
             return httpResponseMessage;
         }
